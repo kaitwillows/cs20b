@@ -1,5 +1,9 @@
+import java.util.*;
+
 class Main {
   public static void main(String[] args) {
-    // testing the autocommit
+    ArrayList test = new ArrayList();
+    test.add("mangues");
+    System.out.println(test);
   }
 }
