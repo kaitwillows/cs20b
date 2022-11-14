@@ -12,6 +12,17 @@ class Main {
   static void duplicateArray() {
     System.out.println("some stuff here");
   }
+
+  static void addItem() {
+    
+  }
+
+  static void printIssues(String issue) {
+    // if issue is all or unresolved, loop through printing all
+    // else loop through untill the issue requested is found
+    // strcomp 0 = the same
+    if (issue.compareto("all"))
+  }
 }
 
 /* 
