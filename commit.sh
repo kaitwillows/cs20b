@@ -1,4 +1,4 @@
 git add .
 git status
-git commit -m "auto commit"
+git commit -m "automated commit"
 git push
