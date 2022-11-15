@@ -4,9 +4,8 @@ class Main {
   public static void main(String[] args) {
     ArrayList<String[]>  test = new ArrayList<String[]>();
     String[] template = 
-      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]", "[LONG DESCRIPTION]"};
+      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]", "[LONG DESCRIPTION]"}; // initiallize more issues so we have something to test with lol
     test.add(template);
-    // System.out.println(test);
     printIssues(test, "all");
   }
 
