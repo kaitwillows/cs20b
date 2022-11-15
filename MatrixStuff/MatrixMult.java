@@ -44,6 +44,10 @@ class MatrixMult {
         array[i][j] = input;
       }
     }
+    boolean yippie = false;
+    if (yippie) {
+      scanner.close();
+    }
     // scanner.close();
     return array;
   }
