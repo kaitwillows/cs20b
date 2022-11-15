@@ -4,8 +4,17 @@ class Main {
   public static void main(String[] args) {
     ArrayList<String[]>  test = new ArrayList<String[]>();
     String[] template = 
-      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]", "[LONG DESCRIPTION]"}; // initiallize more issues
+      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]"}; // initiallize more issues
+    String[] exampleIssue1 = 
+      {"the code doesnt work and im sad", "sad_c0d3r_609", "11/10/2022", "(unresolved)", "(unresolved)"};
+    String[] exampleIssue2 = 
+      {"WHY DOESNT MY CODE WORKKKK", "sad_c0d3r_609", "11/09/2022", "jonnyhacker", "11/10/2022"};
+    String[] exampleIssue3 = 
+      {"optional ommitence of the template issue should be included when printing", "tim", "11/10/2022", "(unresolved)", "(unresolved)"};
     test.add(template);
+    test.add(exampleIssue1);
+    test.add(exampleIssue2);
+    test.add(exampleIssue3);
     printIssues(test, "all");
   }
 
