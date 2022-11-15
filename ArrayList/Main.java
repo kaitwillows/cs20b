@@ -4,7 +4,7 @@ class Main {
   public static void main(String[] args) {
     ArrayList<String[]>  test = new ArrayList<String[]>();
     String[] template = 
-      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]", "[LONG DESCRIPTION]"}; // initiallize more
+      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]", "[LONG DESCRIPTION]"}; // initiallize more issues
     test.add(template);
     printIssues(test, "all");
   }
