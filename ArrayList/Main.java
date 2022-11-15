@@ -17,11 +17,18 @@ class Main {
     
   }
 
-  static void printIssues(String issue) {
+  static void printIssues(ArrayList<String[]> dataStruct, String issue) {
     // if issue is all or unresolved, loop through printing all
     // else loop through untill the issue requested is found
     // strcomp 0 = the same
-    if (issue.compareto("all"))
+    if (issue.compareTo("all") == 0) {
+      System.out.println("printing all issues...\n");
+      for (String[] i : dataStruct) {
+        for (String j : i) {
+          System.out.println(j);
+        }
+      }
+    }
   }
 }
 
