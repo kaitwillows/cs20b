@@ -2,6 +2,7 @@ import java.util.*;
 
 class Main {
   public static void main(String[] args) {
+    System.out.print("\033[H\033[2J"); // clear screen
     ArrayList<String[]>  test = new ArrayList<String[]>();
     String[] template = 
       {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]"}; // initiallize more issues
@@ -23,7 +24,7 @@ class Main {
   static void callMenu(ArrayList<String[]> dataStruct) {
     Scanner menuScanner = new Scanner(System.in);
     Scanner strScanner = new Scanner(System.in);
-    System.out.print("[1] print all issues \n[2] print unresolved issues \n[3] print a specific issue \n[4]add an issue \n[5] mark an issue as resolved \n[6] backup entire issue list \n[7] quit");
+    System.out.print("menu: \n  [1] print all issues \n  [2] print unresolved issues \n  [3] print a specific issue \n  [4]add an issue \n  [5] mark an issue as resolved \n  [6] backup entire issue list \n  [7] quit \nenter an option from the menu above: ");
     int choice = menuScanner.nextInt();
     switch (choice) {
       case 1:
@@ -67,7 +68,7 @@ class Main {
   // INFO: pass "all", or "unresolved" as issue to print all items from the respective sets
   static void printIssues(ArrayList<String[]> dataStruct, String issue) {
     if (issue.compareTo("all") == 0) { // prints all issues, reguardless of status
-      System.out.println("printing all issues...\n");
+      System.out.println("\nprinting all issues...\n");
       for (String[] i : dataStruct) { // each issue
         for (String j : i) { // each item in issue
           System.out.print(j + ", ");
@@ -77,7 +78,7 @@ class Main {
       System.out.print("\n");
     } else if (issue.compareTo("unresolved") == 0) { // prints only unresolved issues
       boolean allResolved = true;
-      System.out.println("printing unresolved issues...\n");
+      System.out.println("\nprinting unresolved issues...\n");
       for (String[] i : dataStruct) {
         if (i[3].compareTo("(unresolved)") == 0 || i[0].compareTo("[ISSUE]") == 0 ) {
           for (String j : i) {
