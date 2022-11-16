@@ -15,8 +15,26 @@ class Main {
     test.add(exampleIssue1);
     test.add(exampleIssue2);
     test.add(exampleIssue3);
-    printIssues(test, "unresolved");
-    printIssues(test, "all");
+    // printIssues(test, "unresolved");
+    // printIssues(test, "all");
+    callMenu(test);
+  }
+
+  static void callMenu(ArrayList<String[]> dataStruct) {
+    Scanner menuScanner = new Scanner(System.in);
+    System.out.print("[1] print all issues \n[2] print unresolved issues \n[3] print a specific issue \n[4]add an issue \n[5] mark an issue as resolved \n[6] backup entire issue list \n[7] quit");
+    int choice = menuScanner.nextInt();
+    switch (choice) {
+      case 1:
+        printIssues(dataStruct, "all");
+        break;
+      case 2:
+        printIssues(dataStruct, "unresolved");
+      default:
+        System.out.println("ayo invalid choice buddy");
+        break;
+    }
+    menuScanner.close();
   }
 
   static void duplicateArray() {
@@ -35,6 +53,7 @@ class Main {
 	 
 	 // pop them in ig
 	 String[] addedIssue = {issue, name, date, "(unresolved)", "(unresolved)"};
+   dataStruct.add(addedIssue);
   }
 
   // INFO: pass "all", or "unresolved" as issue to print all items from the respective sets
