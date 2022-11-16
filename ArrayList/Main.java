@@ -1,23 +1,15 @@
 import java.util.*;
 
-<<<<<<< HEAD
-// HEYYYYYYYY IF YOUR ON THIS MAKE SURE YOURE ON THE RIGHT BRANCH ASDL;FKJASDF;LAKJSDF
-=======
+
 // yippie you're probably on the right branch unless its farther in the future tbh
 
-
->>>>>>> template-rebuild
 
 class Main {
   public static void main(String[] args) {
     System.out.print("\033[H\033[2J"); // clear screen
     ArrayList<String[]>  test = new ArrayList<String[]>();
     String[] template = 
-<<<<<<< HEAD
-      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]", "[COMMENT]"}; // initiallize more issues
-=======
       {"[ISSUE]", "[LINE #]", "[DESCRIPTION]", "[RESOLVED STATUS]"}; // initiallize more issues
->>>>>>> template-rebuild
     String[] exampleIssue1 = 
       {"issue1", "12", "my code no work :(", "unresolved"};
     String[] exampleIssue2 = 
