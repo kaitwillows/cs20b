@@ -41,6 +41,9 @@ class Main {
         String issue = strScanner.nextLine();
         printIssues(dataStruct, issue);
 
+      case 7:
+        System.out.println("\nquitting...\n");
+        System.exit(0);
       default:
         System.out.println("ayo invalid choice buddy");
         break;
