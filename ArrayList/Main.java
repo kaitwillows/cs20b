@@ -15,6 +15,7 @@ class Main {
     test.add(exampleIssue1);
     test.add(exampleIssue2);
     test.add(exampleIssue3);
+    printIssues(test, "unresolved");
     printIssues(test, "all");
   }
 
@@ -23,7 +24,13 @@ class Main {
   }
 
   static void addItem() {
-    
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Issue: ");
+    String issue = scanner.nextLine();
+    System.out.print("Name: ");
+    String name = scanner.nextLine();
+    System.out.print("date: "); // POSSIBLY WE COULD INITIALIZE THIS BY USING THE ACTUAL DATE IDK 
+    String date = scanner.nextLine();
   }
 
   // INFO: pass "all", or "unresolved" as issue to print all items from the respective sets
@@ -36,21 +43,24 @@ class Main {
         }
         System.out.print("\n");
       }
+      System.out.print("\n");
     } else if (issue.compareTo("unresolved") == 0) { // prints only unresolved issues
       boolean allResolved = true;
       System.out.println("printing unresolved issues...\n");
       for (String[] i : dataStruct) {
-        if (i[3].compareTo("(unresolved)") == 0) {
+        if (i[3].compareTo("(unresolved)") == 0 || i[0].compareTo("[ISSUE]") == 0 ) {
           for (String j : i) {
             System.out.print(j + ", ");
           }
+          System.out.print("\n");
           allResolved = false;
         }
-        System.out.print("\n");
+        
       }
       if (allResolved == true) {
         System.out.println("\nall issues have been resolved, yay!!!"); // all issues resolved
       }
+      System.out.print("\n");
     } else { // find the specific issue requested
       int duplicateIssue = 0;
       for (String[] i : dataStruct) {
