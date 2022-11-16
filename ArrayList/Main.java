@@ -22,6 +22,7 @@ class Main {
 
   static void callMenu(ArrayList<String[]> dataStruct) {
     Scanner menuScanner = new Scanner(System.in);
+    Scanner strScanner = new Scanner(System.in);
     System.out.print("[1] print all issues \n[2] print unresolved issues \n[3] print a specific issue \n[4]add an issue \n[5] mark an issue as resolved \n[6] backup entire issue list \n[7] quit");
     int choice = menuScanner.nextInt();
     switch (choice) {
@@ -30,11 +31,17 @@ class Main {
         break;
       case 2:
         printIssues(dataStruct, "unresolved");
+      case 3:
+        System.out.print("enter issue name: \n");
+        String issue = strScanner.nextLine();
+        printIssues(dataStruct, issue);
+
       default:
         System.out.println("ayo invalid choice buddy");
         break;
     }
     menuScanner.close();
+    strScanner.close();
   }
 
   static void duplicateArray() {
@@ -79,7 +86,6 @@ class Main {
           System.out.print("\n");
           allResolved = false;
         }
-        
       }
       if (allResolved == true) {
         System.out.println("\nall issues have been resolved, yay!!!"); // all issues resolved
@@ -101,9 +107,10 @@ class Main {
           System.out.println("issue not found.");
           break;
         case 1:
+          System.out.println("issue found successfully");
           break;
         default: // duplicate case(s)
-          System.out.println("duplicate cases found, please address this.");
+          System.out.println("duplicate cases found, please address this."); // THIS CODE SHOULD NEVER RUN IF THE PROGRAM IS DONE RIGHT
       }
     }
 
