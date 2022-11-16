@@ -1,13 +1,15 @@
 import java.util.*;
 
+// yippie you're probably on the right branch unless its farther in the future tbh
+
 class Main {
   public static void main(String[] args) {
     System.out.print("\033[H\033[2J"); // clear screen
     ArrayList<String[]>  test = new ArrayList<String[]>();
     String[] template = 
-      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]"}; // initiallize more issues
+      {"[ISSUE]", "[LINE #]", "[DESCRIPTION]", "[RESOLVED STATUS]"}; // initiallize more issues
     String[] exampleIssue1 = 
-      {"the code doesnt work and im sad", "sad_c0d3r_609", "11/10/2022", "(unresolved)", "(unresolved)"};
+      {"issue1", "12", "my code no work :(", "unresolved"};
     String[] exampleIssue2 = 
       {"WHY DOESNT MY CODE WORKKKK", "sad_c0d3r_609", "11/09/2022", "jonnyhacker", "11/10/2022"};
     String[] exampleIssue3 = 
@@ -60,7 +62,7 @@ class Main {
     String date = scanner.nextLine();
 	 
 	 // pop them in ig
-	 String[] addedIssue = {issue, name, date, "(unresolved)", "(unresolved)"};
+	 String[] addedIssue = {issue, name, date, "unresolved", "unresolved"}; // fix this shtuff
    dataStruct.add(addedIssue);
    scanner.close();
   }
