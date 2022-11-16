@@ -54,6 +54,7 @@ class Main {
 	 // pop them in ig
 	 String[] addedIssue = {issue, name, date, "(unresolved)", "(unresolved)"};
    dataStruct.add(addedIssue);
+   scanner.close();
   }
 
   // INFO: pass "all", or "unresolved" as issue to print all items from the respective sets
