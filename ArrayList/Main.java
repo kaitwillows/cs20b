@@ -20,10 +20,11 @@ class Main {
   }
 
   static void duplicateArray() {
-    System.out.println("some stuff here");
+    System.out.println("to do");
   }
 
-  static void addItem() {
+  static void addItem(ArrayList<String[]> dataStruct) {
+    // get the things from the user
     Scanner scanner = new Scanner(System.in);
     System.out.print("Issue: ");
     String issue = scanner.nextLine();
@@ -31,6 +32,9 @@ class Main {
     String name = scanner.nextLine();
     System.out.print("date: "); // POSSIBLY WE COULD INITIALIZE THIS BY USING THE ACTUAL DATE IDK 
     String date = scanner.nextLine();
+	 
+	 // pop them in ig
+	 String[] addedIssue = {issue, name, date, "(unresolved)", "(unresolved)"};
   }
 
   // INFO: pass "all", or "unresolved" as issue to print all items from the respective sets
