@@ -1,11 +1,13 @@
 import java.util.*;
 
+// HEYYYYYYYY IF YOUR ON THIS MAKE SURE YOURE ON THE RIGHT BRANCH ASDL;FKJASDF;LAKJSDF
+
 class Main {
   public static void main(String[] args) {
     System.out.print("\033[H\033[2J"); // clear screen
     ArrayList<String[]>  test = new ArrayList<String[]>();
     String[] template = 
-      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]"}; // initiallize more issues
+      {"[ISSUE]", "[IDENTIFIED BY]", "[DATE IDNETIFIED]", "[RESOLVED BY]", "[DATE]", "[COMMENT]"}; // initiallize more issues
     String[] exampleIssue1 = 
       {"the code doesnt work and im sad", "sad_c0d3r_609", "11/10/2022", "(unresolved)", "(unresolved)"};
     String[] exampleIssue2 = 
