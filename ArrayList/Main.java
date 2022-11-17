@@ -13,7 +13,7 @@ class Main {
     String[] exampleIssue1 = 
       {"issue1", "12", "my code no work :(", "unresolved"};
     String[] exampleIssue2 = 
-      {"WHY DOESNT MY CODE WORKKKK", "sad_c0d3r_609", "11/09/2022", "jonnyhacker", "11/10/2022"};
+      {"issue2", "12", "guysss the code doesnt work!@!!!!!", "unresolved"};
     String[] exampleIssue3 = 
       {"ommit template", "tim", "11/10/2022", "optional ommitence of the template issue should be included when printing", "unresolved"};
     test.add(template);
