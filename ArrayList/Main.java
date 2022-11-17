@@ -15,62 +15,110 @@ class Main {
     String[] exampleIssue2 = 
       {"WHY DOESNT MY CODE WORKKKK", "sad_c0d3r_609", "11/09/2022", "jonnyhacker", "11/10/2022"};
     String[] exampleIssue3 = 
-      {"optional ommitence of the template issue should be included when printing", "tim", "11/10/2022", "(unresolved)", "(unresolved)"};
+      {"ommit template", "tim", "11/10/2022", "optional ommitence of the template issue should be included when printing", "unresolved"};
     test.add(template);
     test.add(exampleIssue1);
     test.add(exampleIssue2);
     test.add(exampleIssue3);
     // printIssues(test, "unresolved");
     // printIssues(test, "all");
-    callMenu(test);
+    while (true) {
+      callMenu(test);
+    }
+    
   }
 
   static void callMenu(ArrayList<String[]> dataStruct) {
     Scanner menuScanner = new Scanner(System.in);
     Scanner strScanner = new Scanner(System.in);
-    System.out.print("menu: \n  [1] print all issues \n  [2] print unresolved issues \n  [3] print a specific issue \n  [4] add an issue \n  [5] mark an issue as resolved \n  [6] backup entire issue list \n  [7] quit \n  [8] display help \nenter an option from the menu above: ");
+    System.out.print("menu: \n  [1] print all issues \n  [2] print unresolved issues \n  [3] print a specific issue \n  [4] add an issue \n  [5] mark an issue as resolved \n  [6] backup or recover issue list \n  [7] quit \n  [8] display help \nenter an option from the menu above: ");
     int choice = menuScanner.nextInt();
+    String issue = "NULL";
     switch (choice) {
       case 1:
         printIssues(dataStruct, "all");
         break;
       case 2:
         printIssues(dataStruct, "unresolved");
+        break;
       case 3:
-        System.out.print("enter issue name: \n");
-        String issue = strScanner.nextLine();
+        System.out.print("\nenter issue name: ");
+        issue = strScanner.nextLine();
         printIssues(dataStruct, issue);
-
+        break;
+      case 4:
+        addItem(dataStruct);
+        break;
+      case 5: // mark as resolved
+        System.out.print("\nenter issue name: ");
+        issue = strScanner.nextLine();
+        resolveIssue(dataStruct, issue);
+        break;
+      case 6: // copy list to backup
+        break;
       case 7:
         System.out.println("\nquitting...\n");
         System.exit(0);
       default:
-        System.out.println("ayo invalid choice buddy");
+        System.out.println("\nayo invalid choice buddy\n");
         break;
     }
-    menuScanner.close();
-    strScanner.close();
+    // menuScanner.close();
+    // strScanner.close();
   }
 
+  static void resolveIssue(ArrayList<String[]> dataStruct, String issue) {
+    boolean issueFound = false;
+    for (String[] i : dataStruct) {
+      if (i[0].compareTo(issue) == 0) {
+        i[3] = "resolved";
+        System.out.println("\nsuccessfully resolved issue\n");
+        issueFound = true;
+        break;
+      }
+    }
+    if (!issueFound) {
+      System.out.println("\nissue not found, ensure the name is entered correctly\n");
+    }
+  }
+
+
   static void duplicateArray() {
-    System.out.println("to do");
+    // to do
   }
 
   static void addItem(ArrayList<String[]> dataStruct) {
     // "[ISSUE]", "[LINE #]", "[DESCRIPTION]", "[RESOLVED STATUS]"
     // get the things from the user
+    
     Scanner scanner = new Scanner(System.in);
-    System.out.print("issue (short name): ");
-    String issue = scanner.nextLine();
+    boolean duplicateIssueName = false;
+    String issue = "NULL";
+
+    do {
+      duplicateIssueName = false;
+      System.out.print("issue (short name): ");
+      issue = scanner.nextLine();
+
+      // check if the name already exists
+      for (String[] i : dataStruct) {
+        if (i[0].compareTo(issue) == 0) {
+          duplicateIssueName = true;
+          System.out.println("issue already exists, please enter a unique name.");
+        }
+      }
+    } while (duplicateIssueName);
+
     System.out.print("line number: ");
     String lineNum = scanner.nextLine();
     System.out.print("description (longish name): "); // POSSIBLY WE COULD INITIALIZE THIS BY USING THE ACTUAL DATE IDK 
     String description = scanner.nextLine();
-	 
-	 // pop them in ig
-	 String[] addedIssue = {issue, lineNum, description, "unresolved"}; // fix this shtuff
-   dataStruct.add(addedIssue);
-   scanner.close();
+
+
+    // pop them in ig
+    String[] addedIssue = {issue, lineNum, description, "unresolved"}; // fix this shtuff
+    dataStruct.add(addedIssue);
+    // scanner.close();
   }
 
   // INFO: pass "all", or "unresolved" as issue to print all items from the respective sets
@@ -108,18 +156,19 @@ class Main {
             System.out.print(j + ", ");
           }
           duplicateIssue++;
+          System.out.print("\n");
         }
-        System.out.print("\n");
+        
       }
       switch (duplicateIssue) {
         case 0:
-          System.out.println("issue not found.");
+          System.out.println("issue not found.\n");
           break;
         case 1:
-          System.out.println("issue found successfully");
+          System.out.println("issue found successfully\n");
           break;
         default: // duplicate case(s)
-          System.out.println("duplicate cases found, please address this."); // THIS CODE SHOULD NEVER RUN IF THE PROGRAM IS DONE RIGHT
+          System.out.println("duplicate cases found, please address this.\n"); // THIS CODE SHOULD NEVER RUN IF THE PROGRAM IS DONE RIGHT
       }
     }
   }
