@@ -3,6 +3,11 @@ import java.util.*;
 
 // yippie you're probably on the right branch unless its farther in the future tbh
 
+// local compile < 0.7s
+// replit compile < 6.8s
+// replit run ~= 0.9s
+// local run ~= 0.1s
+
 
 class Main {
   public static void main(String[] args) {
@@ -25,7 +30,7 @@ class Main {
     while (true) {
       callMenu(test);
     }
-    
+
   }
 
   static void callMenu(ArrayList<String[]> dataStruct) {
