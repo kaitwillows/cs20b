@@ -1,7 +1,6 @@
 import java.util.*;
 
 
-// yippie you're probably on the right branch unless its farther in the future tbh
 
 // local compile < 0.7s
 // replit compile < 6.8s
