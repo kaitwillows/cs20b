@@ -19,9 +19,9 @@ class Main {
     String[] exampleIssue1 = 
       {"issue1", "12", "my code no work :(", "unresolved"};
     String[] exampleIssue2 = 
-      {"issue2", "12", "guysss the code doesnt work!@!!!!!", "unresolved"};
+      {"issue2", "12", "guysss the code doesnt work!!!!!!", "unresolved"};
     String[] exampleIssue3 = 
-      {"ommit template", "tim", "11/10/2022", "optional ommitence of the template issue should be included when printing", "unresolved"};
+      {"ommit template", "18", "optional ommitence of the template issue should be included when printing", "unresolved"};
     test.add(template);
     test.add(exampleIssue1);
     test.add(exampleIssue2);
@@ -58,6 +58,7 @@ class Main {
       case 3:
         System.out.print("\nenter issue name: ");
         issue = strScanner.nextLine();
+        System.out.print("\n");
         printIssues(dataStruct, issue);
         break;
       case 4:
@@ -69,9 +70,11 @@ class Main {
         resolveIssue(dataStruct, issue);
         break;
       case 6: // copy list to backup
+        System.out.println("\nthe list has been backed up");
         dataStruct.get(0)[0] = "backup";
         return dataStruct;
       case 7: // recover
+      System.out.println("\nthe list has been restored from backup");
         return dataStruct;
       case 8:
         System.out.println("\nquitting...\n");
@@ -120,7 +123,7 @@ class Main {
 
     do {
       duplicateIssueName = false;
-      System.out.print("issue (short name): ");
+      System.out.print("\nissue (short name): ");
       issue = scanner.nextLine();
 
       // check if the name already exists
@@ -136,13 +139,15 @@ class Main {
     String lineNum = scanner.nextLine();
     System.out.print("description (longish name): "); // POSSIBLY WE COULD INITIALIZE THIS BY USING THE ACTUAL DATE IDK 
     String description = scanner.nextLine();
-    System.out.print()
+    System.out.print("\n");
 
 
     // pop them in ig
     String[] addedIssue = {issue, lineNum, description, "unresolved"}; // fix this shtuff
     dataStruct.add(addedIssue);
     // scanner.close();
+
+    System.out.println("issue added successfully\n");
   }
 
   // INFO: pass "all", or "unresolved" as issue to print all items from the respective sets
@@ -189,7 +194,7 @@ class Main {
           System.out.println("issue not found.\n");
           break;
         case 1:
-          System.out.println("issue found successfully\n");
+          System.out.println("\nissue found successfully\n");
           break;
         default: // duplicate case(s)
           System.out.println("duplicate cases found, please address this.\n"); // THIS CODE SHOULD NEVER RUN IF THE PROGRAM IS DONE RIGHT
