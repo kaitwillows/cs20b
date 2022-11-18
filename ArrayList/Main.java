@@ -12,7 +12,8 @@ import java.util.*;
 class Main {
   public static void main(String[] args) {
     System.out.print("\033[H\033[2J"); // clear screen
-    ArrayList<String[]>  test = new ArrayList<String[]>();
+    ArrayList<String[]> test = new ArrayList<String[]>();
+    ArrayList<String[]> backup = new ArrayList<String[]>();
     String[] template = 
       {"[ISSUE]", "[LINE #]", "[DESCRIPTION]", "[RESOLVED STATUS]"}; // initiallize more issues
     String[] exampleIssue1 = 
@@ -28,15 +29,23 @@ class Main {
     // printIssues(test, "unresolved");
     // printIssues(test, "all");
     while (true) {
-      callMenu(test);
+      ArrayList<String[]> returnedStruct = callMenu(test);
+      if (returnedStruct.get(0)[0].compareTo("backup") == 0) { // recieving backup
+        backup = new ArrayList<String[]>(returnedStruct);
+      } else if (returnedStruct.get(0)[0].compareTo("[ISSUE]") == 0) {
+        test = new ArrayList<String[]>(backup);
+      }
     }
 
   }
 
-  static void callMenu(ArrayList<String[]> dataStruct) {
+  static ArrayList<String[]> callMenu(ArrayList<String[]> dataStruct) {
+    ArrayList<String[]> emptyList = new ArrayList<String[]>();
+    String[] placeHolder = {"placeholder"};
+    emptyList.add(placeHolder);
     Scanner menuScanner = new Scanner(System.in);
     Scanner strScanner = new Scanner(System.in);
-    System.out.print("menu: \n  [1] print all issues \n  [2] print unresolved issues \n  [3] print a specific issue \n  [4] add an issue \n  [5] mark an issue as resolved \n  [6] backup or recover issue list \n  [7] quit \n  [8] display help \nenter an option from the menu above: ");
+    System.out.print("menu: \n  [1] print all issues \n  [2] print unresolved issues \n  [3] print a specific issue \n  [4] add an issue \n  [5] mark an issue as resolved \n  [6] backup issue list \n  [7] recover issue list\n  [8] quit \nenter an option from the menu above: ");
     int choice = menuScanner.nextInt();
     String issue = "NULL";
     switch (choice) {
@@ -60,14 +69,18 @@ class Main {
         resolveIssue(dataStruct, issue);
         break;
       case 6: // copy list to backup
-        break;
-      case 7:
+        dataStruct.get(0)[0] = "backup";
+        return dataStruct;
+      case 7: // recover
+        return dataStruct;
+      case 8:
         System.out.println("\nquitting...\n");
         System.exit(0);
       default:
         System.out.println("\nayo invalid choice buddy\n");
         break;
     }
+    return emptyList;
     // menuScanner.close();
     // strScanner.close();
   }
@@ -76,6 +89,10 @@ class Main {
     boolean issueFound = false;
     for (String[] i : dataStruct) {
       if (i[0].compareTo(issue) == 0) {
+        if (i[3].compareTo("resolved") == 0) {
+          System.out.println("\n the issue is allready resolved\n");
+          break;
+        }
         i[3] = "resolved";
         System.out.println("\nsuccessfully resolved issue\n");
         issueFound = true;
@@ -88,8 +105,9 @@ class Main {
   }
 
 
-  static void duplicateArray() {
-    // to do
+  static ArrayList<String[]> duplicateArray(ArrayList<String[]> dataStruct) {
+    dataStruct.get(0)[0] = "backup";
+    return dataStruct;
   }
 
   static void addItem(ArrayList<String[]> dataStruct) {
@@ -118,6 +136,7 @@ class Main {
     String lineNum = scanner.nextLine();
     System.out.print("description (longish name): "); // POSSIBLY WE COULD INITIALIZE THIS BY USING THE ACTUAL DATE IDK 
     String description = scanner.nextLine();
+    System.out.print()
 
 
     // pop them in ig
