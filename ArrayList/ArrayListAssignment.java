@@ -8,7 +8,7 @@ import java.util.*;
 // local run ~= 0.1s
 
 
-class Main {
+class ArrayListAssignment {
   public static void main(String[] args) {
     System.out.print("\033[H\033[2J"); // clear screen
     ArrayList<String[]> test = new ArrayList<String[]>();
