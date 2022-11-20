@@ -1,14 +1,15 @@
 class Q1 {
-    static double balance = 500;
-    public static void main(String[] args) {
-        withdraw(200);
+    double balance = 500;
+    public Q1(double balance) {
+        balance = this.balance;
     }
 
-    static void withdraw(double amount) {
+    public void withdraw(double amount) {
         if (amount > balance || amount <= 0) {
-            String s = "Can't withdraw more than the balance.";
+            String s = "Withdrawl amound must be greater than 0 and within the account ballance.";
             IllegalArgumentException e = new IllegalArgumentException(s);
             throw e;
         }
+        System.out.println("withdrawled");
     }
 }
