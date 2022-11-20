@@ -17,13 +17,16 @@ class BP37 {
                         // question 1
                         Q1 q1 = new Q1(500); // balance of 500
                         q1.withdraw(501); // withdrawls 
+                        break;
+                    case 2:
+                        // question 2
+
 
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("invalid input.");
             }
-            // question 2
         }
         scanner.close();
     }
