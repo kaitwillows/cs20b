@@ -7,9 +7,12 @@ class BP37 {
         while (true) {
             System.out.println("enter question number (0 to quit): ");
             int input = scanner.nextInt();
-            
+            if (input == 0) {
+                break;
+            }
             try {
                 switch (input) {
+
                     case 1:
                         // question 1
                         Q1 q1 = new Q1(500); // balance of 500
@@ -22,5 +25,6 @@ class BP37 {
             }
             // question 2
         }
+        scanner.close();
     }
 }
