@@ -1,15 +1,23 @@
+import java.util.*;
+
 class Q1 {
-  double balance = 500;
-  public Q1(double balance) {
-    balance = this.balance;
+  static double balance = 500;
+  static double lastBalance;
+
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Current account balance is $" + balance + "\nenter withdraw amount: ");
+    withdraw(scanner.nextDouble());
   }
 
-  public void withdraw(double amount) {
+  static void withdraw(double amount) {
     if (amount > balance || amount <= 0) {
       String s = "Withdrawl amound must be greater than 0 and within the account ballance.";
       IllegalArgumentException e = new IllegalArgumentException(s);
       throw e;
     }   
-    System.out.println("withdrawled");
+    lastBalance = balance;
+    balance = balance - amount;
+    System.out.println("Withdrew $" + amount + " from a balance of $" + lastBalance + ". Your new balance is $" + balance);
   }
 }

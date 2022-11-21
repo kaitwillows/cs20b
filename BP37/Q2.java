@@ -4,7 +4,7 @@ class Q2 {
   public Q2(String studentName) {
     studentName = this.studentName;
   }
-  public void setStudentScore(int score) {
+  static void setStudentScore(int score) {
     if (score < 0 || score > 100) {
       String s = "Score must be between 0 and 100";
       IllegalArgumentException e = new IllegalArgumentException(s);
