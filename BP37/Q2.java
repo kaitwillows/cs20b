@@ -1,8 +1,8 @@
 class Q2 {
   // precondition: score must be between 0 and 100
   String studentName; 
-  public Q2(String studentName) {
-    studentName = this.studentName;
+  public static void main(String[] args) {
+    setStudentScore(2);
   }
   static void setStudentScore(int score) {
     if (score < 0 || score > 100) {
@@ -10,5 +10,6 @@ class Q2 {
       IllegalArgumentException e = new IllegalArgumentException(s);
       throw e;
     }
+    System.out.println("Set score successfully"); // in reality, nothing happened
   }
 }

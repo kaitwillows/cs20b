@@ -29,6 +29,7 @@ class MatrixTester {
         System.out.print("\nresult:\n");
         MatrixMult.printArray(matrix);
         break;
+        
 
       case 2: // input and use user arrays
         System.out.println("\nfirst array:");
