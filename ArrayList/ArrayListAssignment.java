@@ -1,5 +1,6 @@
 import java.util.*;
 
+// NOTE: line 86 may break the program when it closes the scanners 
 
 
 // local compile < 0.7s
@@ -82,9 +83,10 @@ class ArrayListAssignment {
         System.out.println("\nayo invalid choice buddy\n");
         break;
     }
-    return emptyList;
     // menuScanner.close();
-    // strScanner.close();
+    // strScanner.close(); // IDK BUT THESE MIGHT BREAK THE PROGRAM I SHOULD REALLY FIGURE THAT OUT
+    return emptyList;
+
   }
 
   static void resolveIssue(ArrayList<String[]> dataStruct, String issue) {
@@ -147,6 +149,7 @@ class ArrayListAssignment {
     // scanner.close();
 
     System.out.println("issue added successfully\n");
+    // scanner.close(); // ALSO THIS MIGHT BREAK IT
   }
 
   // INFO: pass "all", or "unresolved" as issue to print all items from the respective sets
