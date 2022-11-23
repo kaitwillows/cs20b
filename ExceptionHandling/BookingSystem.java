@@ -8,7 +8,12 @@ public class BookingSystem {
 
     // populate arrays with random seats
     double num = Math.random();
-    // System.out.println(num + " " +  Math.round(num));
+    prePopulate(leftSection, 2);
+    prePopulate(rightSection, 2);
+    prePopulate(middleSection, 1);
+    prePopulate(backSection, 3);
+
+
     printTheater(leftSection, rightSection, middleSection, backSection);
 
 
@@ -16,40 +21,60 @@ public class BookingSystem {
 
   // prepopulate seats by section, demand determines how full that section will be
   static void prePopulate(int[][] section, double demand) {
+    for (int i = 0; i < section.length; i++) {
+      for (int j = 0; j < section[0].length; j++) {
+        int taken = (int) Math.round(Math.random() * demand);
+        if (taken == 0) {
+          section[i][j] = 1;
+        }
+        // System.out.println(taken);
+        // System.out.println(Math.random() * demand);
+      }
+    }
 
   }
 
   static void printTheater(int[][] leftSection, int[][] rightSection, int[][] middleSection, int[][] backSection) {
     // first 8 rows (mid+sides)
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < middleSection.length; i++) {
       // left
-      for (int j = 0; j < 4; j++) {
-        System.out.print(leftSection[i][j]);
+      for (int j = 0; j < leftSection[0].length; j++) {
+        printSeat(leftSection[i][j]);
         // System.out.print("l");
       }
-      System.out.print(" ");
+      System.out.print("   ");
       // middle
-      for (int j = 0; j < 20; j++) {
-        System.out.print(middleSection[i][j]);
+      for (int j = 0; j < middleSection[0].length; j++) {
+        printSeat(middleSection[i][j]);
       }
-      System.out.print(" ");
+      System.out.print("   ");
       // right
-      for (int j = 0; j < 4; j++) {
-        System.out.print(rightSection[i][j]);
+      for (int j = 0; j < rightSection[0].length; j++) {
+        printSeat(rightSection[i][j]);
       }
       System.out.print("\n");
     }
-    // System.out.print("\n");
-    for (int i = 0; i < 2; i++) {
-      for (int j = 0; j < 30; j++) {
-        System.out.print(backSection[i][j]);
+    System.out.print("\n  ");
+    // back
+    for (int i = 0; i < backSection.length; i++) {
+      for (int j = 0; j < backSection[0].length; j++) {
+        printSeat(backSection[i][j]);
       }
-      System.out.print("\n");
+      System.out.print("\n  ");
     }
   }
-  
+
+  static void printSeat(int seat) {
+    if (seat == 0) {
+      System.out.print("\u001B[32m0"); // green (open)
+    }
+    else if (seat == 1) {
+      System.out.print("\u001B[31m1"); // red (taken)
+    }
+  }
   // printSection for "zooming" in to section and booking it and stuff
 }
+
 
 
 
