@@ -8,13 +8,14 @@ public class BookingSystem {
 
     // populate arrays with random seats
     double num = Math.random();
-    prePopulate(leftSection, 2);
-    prePopulate(rightSection, 2);
-    prePopulate(middleSection, 1);
-    prePopulate(backSection, 3);
+    prePopulate(leftSection, 25);
+    prePopulate(rightSection, 25);
+    prePopulate(middleSection, 65);
+    prePopulate(backSection, 30);
 
 
     printTheater(leftSection, rightSection, middleSection, backSection);
+    // printSection(backSection);
 
 
   }
@@ -23,8 +24,8 @@ public class BookingSystem {
   static void prePopulate(int[][] section, double demand) {
     for (int i = 0; i < section.length; i++) {
       for (int j = 0; j < section[0].length; j++) {
-        int taken = (int) Math.round(Math.random() * demand);
-        if (taken == 0) {
+        int taken = (int) Math.floor(Math.random() * 101);
+        if (taken <= demand) {
           section[i][j] = 1;
         }
         // System.out.println(taken);
@@ -64,6 +65,24 @@ public class BookingSystem {
     }
   }
 
+    // printSection for "zooming" in to section and booking it and stuff
+    static void printSection(int[][] section) {
+      System.out.print("  ");
+      for (int i = 0; i < section[0].length; i++) {
+        System.out.print(i + " ");
+      }
+      System.out.print("\n");
+
+      for (int i = 0; i < section.length; i++) {
+        System.out.print("\u001B[37m" + (char) (i + 65) + " "); // row numbers
+        for (int j = 0; j < section[0].length; j++) {
+          printSeat(section[i][j]);
+          System.out.print(" ");
+        }
+        System.out.print("\n");
+      }
+    }
+
   static void printSeat(int seat) {
     if (seat == 0) {
       System.out.print("\u001B[32m0"); // green (open)
@@ -72,7 +91,7 @@ public class BookingSystem {
       System.out.print("\u001B[31m1"); // red (taken)
     }
   }
-  // printSection for "zooming" in to section and booking it and stuff
+
 }
 
 
