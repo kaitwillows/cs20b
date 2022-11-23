@@ -10,7 +10,7 @@ public class BookingSystem {
     double num = Math.random();
     prePopulate(leftSection, 25);
     prePopulate(rightSection, 25);
-    prePopulate(middleSection, 65);
+    prePopulate(middleSection, 65); // demand is % how full the section will be
     prePopulate(backSection, 30);
 
 
@@ -21,7 +21,7 @@ public class BookingSystem {
   }
 
   // prepopulate seats by section, demand determines how full that section will be
-  static void prePopulate(int[][] section, double demand) {
+  static void prePopulate(int[][] section, int demand) {
     for (int i = 0; i < section.length; i++) {
       for (int j = 0; j < section[0].length; j++) {
         int taken = (int) Math.floor(Math.random() * 101);
