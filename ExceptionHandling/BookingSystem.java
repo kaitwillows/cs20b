@@ -27,7 +27,7 @@ public class BookingSystem {
 
 
     
-    for (int i = 0; i < friends; i--) { // killing off the friends one by one
+    for (int i = 0; i <= friends; i--) { // killing off the friends one by one
       System.out.print("\u001B[37m");
       System.out.print("What section would you like to view? (enter m, l, r, or b for middle left right or back): ");
       char section = strScanner.next().charAt(0);
