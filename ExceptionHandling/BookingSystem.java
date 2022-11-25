@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class BookingSystem {
   public static void main(String[] args) {
-    System.out.print("\033[H\033[2J\n\n");
+    System.out.print("\033[H\033[2JNote: you can type 'q' to exit at any time\n\n");
     Scanner strScanner = new Scanner(System.in);
-    Scanner intScanner = new Scanner(System.in);
+    // Scanner intScanner = new Scanner(System.in);
     // initialize arrays
     int[][] leftSection = new int[8][4];
     int[][] rightSection = new int[8][4];
@@ -22,17 +22,20 @@ public class BookingSystem {
     printTheater(leftSection, rightSection, middleSection, backSection);
     // printSection(backSection);
 
-    System.out.print("How many friends do you think you have: ");
-    int friends = intScanner.nextInt();
+    System.out.print("How many friends do you have (excluding yourself): ");
+    String friendsString = strScanner.next();
+    int friends = quitTest(friendsString);
 
     for (int i = 0; i <= friends;) { // killing off the friends one by one
 
-      System.out.print("\033[H\033[2J\n"); // clearscreen
-      System.out.println("Booking seat " + (i + 1) + " of " + (friends + 1) + "...");
+      System.out.print("\033[H\033[2J"); // clearscreen
+      System.out.println("Booking seat " + (i + 1) + " of " + (friends + 1) + "...\n");
       printTheater(leftSection, rightSection, middleSection, backSection);
 
       System.out.print("What section would you like to view? (enter m, l, r, or b for middle left right or back): ");
-      char section = strScanner.next().charAt(0);
+      String sectionString = strScanner.next();
+      quitTest(sectionString);
+      char section = sectionString.charAt(0);
 
       System.out.print("\033[H\033[2J\n\n\n"); // clearscreen
       while (true) {
@@ -82,8 +85,8 @@ public class BookingSystem {
           i++; // take a friend off lol
           break;
         } catch (IllegalArgumentException occupiedMsg) {
-          System.out.print("\033[H\033[2J\n"); // clearscreen
-          System.out.println("That seat is taken, please choose another.\n");
+          System.out.print("\033[H\033[2J"); // clearscreen
+          System.out.println("That seat is taken, please choose another.\n\n");
         }
       }
     }
@@ -94,13 +97,17 @@ public class BookingSystem {
   }
 
   static void bookSeat(int[][] section) throws IllegalArgumentException, IndexOutOfBoundsException {
-    Scanner intScanner = new Scanner(System.in);
     Scanner strScanner = new Scanner(System.in);
     System.out.print("\u001B[37m");
+
     System.out.print("\nenter row letter: ");
-    int row = strScanner.next().charAt(0) - 97;
+    String rowString = strScanner.next();
+    quitTest(rowString);
+    int row = rowString.charAt(0) - 97;
+
     System.out.print("enter column number: ");
-    int col = intScanner.nextInt() - 1;
+    String colString = strScanner.next();
+    int col = quitTest(colString) - 1;
     // intScanner.close();
 
     if (section[row][col] == 1) { // seat taken
@@ -194,6 +201,20 @@ public class BookingSystem {
     } else if (seat == 1) {
       System.out.print("\u001B[31m1"); // red (taken)
     }
+  }
+
+  static int quitTest(String input) {
+    try {
+      if (input.charAt(0) == 'q') {
+        System.out.println("\nquitting...\n");
+        System.exit(0);
+      } else {
+        return Integer.parseInt(input);
+      }
+    } catch (NumberFormatException e) {
+
+    }
+    return 0;
   }
 
 }
