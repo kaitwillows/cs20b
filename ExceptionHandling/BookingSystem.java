@@ -25,21 +25,18 @@ public class BookingSystem {
     System.out.print("How many friends do you think you have: ");
     int friends = intScanner.nextInt();
 
-
-    
     for (int i = 0; i <= friends;) { // killing off the friends one by one
 
       System.out.print("\033[H\033[2J\n"); // clearscreen
       System.out.println("Booking seat " + (i + 1) + " of " + (friends + 1) + "...");
       printTheater(leftSection, rightSection, middleSection, backSection);
 
-
       System.out.print("What section would you like to view? (enter m, l, r, or b for middle left right or back): ");
       char section = strScanner.next().charAt(0);
 
       System.out.print("\033[H\033[2J\n\n\n"); // clearscreen
       while (true) {
-        
+
         switch (section) {
           case 'M':
           case 'm':
@@ -59,7 +56,7 @@ public class BookingSystem {
             break;
           default:
             i--;
-      }
+        }
         try {
           // book from section
           switch (section) {
@@ -79,10 +76,10 @@ public class BookingSystem {
             case 'b':
               bookSeat(backSection);
               break;
-          
-        }
-          
-          i++; //take a friend off lol
+
+          }
+
+          i++; // take a friend off lol
           break;
         } catch (IllegalArgumentException occupiedMsg) {
           System.out.print("\033[H\033[2J\n"); // clearscreen
@@ -94,9 +91,7 @@ public class BookingSystem {
     System.out.print("All seats have been booked successfully.\n\n");
     printTheater(leftSection, rightSection, middleSection, backSection);
 
-    
   }
-
 
   static void bookSeat(int[][] section) throws IllegalArgumentException, IndexOutOfBoundsException {
     Scanner intScanner = new Scanner(System.in);
@@ -112,11 +107,10 @@ public class BookingSystem {
       String occupiedMsg = "Seat is occupied.";
       IllegalArgumentException occupiedException = new IllegalArgumentException(occupiedMsg);
       throw occupiedException;
-    } 
+    }
     section[row][col] = 1;
     System.out.println("Seat booked successfully.");
   }
-
 
   // prepopulate seats by section, demand determines how full that section will be
   static void prePopulate(int[][] section, int demand) {
@@ -170,64 +164,59 @@ public class BookingSystem {
     System.out.print("\u001B[37m");
   }
 
-    // printSection for "zooming" in to section and booking it and stuff
-    static void printSection(int[][] section) {
-      // System.out.print("\033[H\033[2J");
-      System.out.print("   ");
-      for (int i = 0; i < section[0].length; i++) {
-        if (i < 9) {
-          System.out.print((i + 1) + "  ");
-        } else {
-          System.out.print((i + 1) + " ");
-        }
-        
+  // printSection for "zooming" in to section and booking it and stuff
+  static void printSection(int[][] section) {
+    // System.out.print("\033[H\033[2J");
+    System.out.print("   ");
+    for (int i = 0; i < section[0].length; i++) {
+      if (i < 9) {
+        System.out.print((i + 1) + "  ");
+      } else {
+        System.out.print((i + 1) + " ");
+      }
+
+    }
+    System.out.print("\n");
+
+    for (int i = 0; i < section.length; i++) {
+      System.out.print("\u001B[37m" + (char) (i + 65) + "  "); // row numbers
+      for (int j = 0; j < section[0].length; j++) {
+        printSeat(section[i][j]);
+        System.out.print("  ");
       }
       System.out.print("\n");
-
-      for (int i = 0; i < section.length; i++) {
-        System.out.print("\u001B[37m" + (char) (i + 65) + "  "); // row numbers
-        for (int j = 0; j < section[0].length; j++) {
-          printSeat(section[i][j]);
-          System.out.print("  ");
-        }
-        System.out.print("\n");
-      }
     }
+  }
 
   static void printSeat(int seat) {
     if (seat == 0) {
       System.out.print("\u001B[32m0"); // green (open)
-    }
-    else if (seat == 1) {
+    } else if (seat == 1) {
       System.out.print("\u001B[31m1"); // red (taken)
     }
   }
 
 }
 
-
-
-
-
 /*
-3 seating sections
-  - main
-  - right
-  - left
-  - back/balcony
-  like:
-
-              [screen]
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-   bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-
-- make the taken seats red or som
-*/
+ * 3 seating sections
+ * - main
+ * - right
+ * - left
+ * - back/balcony
+ * like:
+ * 
+ * [screen]
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ * bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ * 
+ * - make the taken seats red or som
+ */
