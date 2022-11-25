@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class BookingSystem {
   public static void main(String[] args) {
+    System.out.print("\033[H\033[2J\n\n");
     Scanner strScanner = new Scanner(System.in);
     Scanner intScanner = new Scanner(System.in);
     // initialize arrays
@@ -17,60 +18,94 @@ public class BookingSystem {
     prePopulate(middleSection, 65); // demand is % how full the section will be
     prePopulate(backSection, 30);
 
-    System.out.print("\033[H\033[2J\n");
+    // System.out.print("\033[H\033[2J\n");
     printTheater(leftSection, rightSection, middleSection, backSection);
     // printSection(backSection);
 
-    System.out.print("\u001B[37m");
     System.out.print("How many friends do you think you have: ");
     int friends = intScanner.nextInt();
 
 
     
-    for (int i = 0; i <= friends; i--) { // killing off the friends one by one
-      System.out.print("\u001B[37m");
+    for (int i = 0; i <= friends;) { // killing off the friends one by one
+
+      System.out.print("\033[H\033[2J\n"); // clearscreen
+      System.out.println("Booking seat " + (i + 1) + " of " + (friends + 1) + "...");
+      printTheater(leftSection, rightSection, middleSection, backSection);
+
+
       System.out.print("What section would you like to view? (enter m, l, r, or b for middle left right or back): ");
       char section = strScanner.next().charAt(0);
 
-      // print zoomed section
-      switch (section) {
-        case 'M':
-        case 'm':
-          printSection(middleSection);
-          bookSeat(middleSection);
+      System.out.print("\033[H\033[2J\n\n\n"); // clearscreen
+      while (true) {
+        
+        switch (section) {
+          case 'M':
+          case 'm':
+            printSection(middleSection);
+            break;
+          case 'L':
+          case 'l':
+            printSection(leftSection);
+            break;
+          case 'R':
+          case 'r':
+            printSection(rightSection);
+            break;
+          case 'B':
+          case 'b':
+            printSection(backSection);
+            break;
+          default:
+            System.out.print("ayo?");
+            i--;
+      }
+        try {
+          // book from section
+          switch (section) {
+            case 'M':
+            case 'm':
+              bookSeat(middleSection);
+              break;
+            case 'L':
+            case 'l':
+              bookSeat(leftSection);
+              break;
+            case 'R':
+            case 'r':
+              bookSeat(rightSection);
+              break;
+            case 'B':
+            case 'b':
+              bookSeat(backSection);
+              break;
+          
+        }
+          
+          i++; //take a friend off lol
           break;
-        case 'L':
-        case 'l':
-          printSection(leftSection);
-          bookSeat(leftSection);
-          break;
-        case 'R':
-        case 'r':
-          printSection(rightSection);
-          bookSeat(rightSection);
-          break;
-        case 'B':
-        case 'b':
-          printSection(backSection);
-          bookSeat(backSection);
-          break;
-        default:
-          System.out.print("ayo?");
-          i++;
+        } catch (IllegalArgumentException occupiedMsg) {
+          System.out.print("\033[H\033[2J\n"); // clearscreen
+          System.out.println("That seat is taken, please choose another.\n");
+        }
       }
     }
+    System.out.print("\033[H\033[2J"); // clearscreen
+    System.out.print("All seats have been booked successfully.\n\n");
+    printTheater(leftSection, rightSection, middleSection, backSection);
 
     
-    // change it back to white at the end
-    System.out.print("\u001B[37m");
   }
 
 
   static void bookSeat(int[][] section) throws IllegalArgumentException, IndexOutOfBoundsException {
     Scanner intScanner = new Scanner(System.in);
-    System.out.print("\nenter row: ");
-    int row = intScanner.nextInt() - 1;
-    System.out.print("enter row: ");
+    Scanner strScanner = new Scanner(System.in);
+    System.out.print("\u001B[37m");
+    System.out.print("\nenter row letter: ");
+    int row = strScanner.next().charAt(0) - 97;
+    System.out.print("enter column number: ");
     int col = intScanner.nextInt() - 1;
     // intScanner.close();
 
@@ -133,11 +168,12 @@ public class BookingSystem {
       System.out.print("\n");
     }
     System.out.print("\n");
+    System.out.print("\u001B[37m");
   }
 
     // printSection for "zooming" in to section and booking it and stuff
     static void printSection(int[][] section) {
-      System.out.print("\033[H\033[2J");
+      // System.out.print("\033[H\033[2J");
       System.out.print("   ");
       for (int i = 0; i < section[0].length; i++) {
         if (i < 9) {
