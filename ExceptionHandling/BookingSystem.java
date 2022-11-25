@@ -58,7 +58,6 @@ public class BookingSystem {
             printSection(backSection);
             break;
           default:
-            System.out.print("ayo?");
             i--;
       }
         try {
