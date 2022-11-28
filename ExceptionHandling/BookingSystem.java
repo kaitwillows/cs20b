@@ -2,8 +2,9 @@ import java.util.Scanner;
 
 public class BookingSystem {
   public static void main(String[] args) {
+    System.out.print("\033[H\033[2JNote: you can type 'q' to exit at any time\n\n");
     Scanner strScanner = new Scanner(System.in);
-    Scanner intScanner = new Scanner(System.in);
+    // Scanner intScanner = new Scanner(System.in);
     // initialize arrays
     int[][] leftSection = new int[8][4];
     int[][] rightSection = new int[8][4];
@@ -17,72 +18,106 @@ public class BookingSystem {
     prePopulate(middleSection, 65); // demand is % how full the section will be
     prePopulate(backSection, 30);
 
-    System.out.print("\033[H\033[2J\n");
+    // System.out.print("\033[H\033[2J\n");
     printTheater(leftSection, rightSection, middleSection, backSection);
     // printSection(backSection);
 
-    System.out.print("\u001B[37m");
-    System.out.print("How many friends do you think you have: ");
-    int friends = intScanner.nextInt();
+    System.out.print("How many friends do you have (excluding yourself): ");
+    String friendsString = strScanner.next();
+    int friends = quitTest(friendsString);
 
+    for (int i = 0; i <= friends;) { // killing off the friends one by one
 
-    
-    for (int i = 0; i <= friends; i--) { // killing off the friends one by one
-      System.out.print("\u001B[37m");
+      System.out.print("\033[H\033[2J"); // clearscreen
+      System.out.println("Booking seat " + (i + 1) + " of " + (friends + 1) + "...\n");
+      printTheater(leftSection, rightSection, middleSection, backSection);
+
       System.out.print("What section would you like to view? (enter m, l, r, or b for middle left right or back): ");
-      char section = strScanner.next().charAt(0);
+      String sectionString = strScanner.next();
+      quitTest(sectionString);
+      char section = sectionString.charAt(0);
 
-      // print zoomed section
-      switch (section) {
-        case 'M':
-        case 'm':
-          printSection(middleSection);
-          bookSeat(middleSection);
+      System.out.print("\033[H\033[2J\n\n\n"); // clearscreen
+      while (true) {
+
+        switch (section) {
+          case 'M':
+          case 'm':
+            printSection(middleSection);
+            break;
+          case 'L':
+          case 'l':
+            printSection(leftSection);
+            break;
+          case 'R':
+          case 'r':
+            printSection(rightSection);
+            break;
+          case 'B':
+          case 'b':
+            printSection(backSection);
+            break;
+          default:
+            i--;
+        }
+        try {
+          // book from section
+          switch (section) {
+            case 'M':
+            case 'm':
+              bookSeat(middleSection);
+              break;
+            case 'L':
+            case 'l':
+              bookSeat(leftSection);
+              break;
+            case 'R':
+            case 'r':
+              bookSeat(rightSection);
+              break;
+            case 'B':
+            case 'b':
+              bookSeat(backSection);
+              break;
+
+          }
+
+          i++; // take a friend off lol
           break;
-        case 'L':
-        case 'l':
-          printSection(leftSection);
-          bookSeat(leftSection);
-          break;
-        case 'R':
-        case 'r':
-          printSection(rightSection);
-          bookSeat(rightSection);
-          break;
-        case 'B':
-        case 'b':
-          printSection(backSection);
-          bookSeat(backSection);
-          break;
-        default:
-          System.out.print("ayo?");
-          i++;
+        } catch (IllegalArgumentException occupiedMsg) {
+          System.out.print("\033[H\033[2J"); // clearscreen
+          System.out.println("That seat is taken, please choose another.\n\n");
+        }
       }
     }
+    System.out.print("\033[H\033[2J"); // clearscreen
+    System.out.print("All seats have been booked successfully.\n\n");
+    printTheater(leftSection, rightSection, middleSection, backSection);
 
-    
-    // change it back to white at the end
-    System.out.print("\u001B[37m");
   }
 
-
   static void bookSeat(int[][] section) throws IllegalArgumentException, IndexOutOfBoundsException {
-    Scanner intScanner = new Scanner(System.in);
-    System.out.print("\nenter row: ");
-    int row = intScanner.nextInt() - 1;
-    System.out.print("enter row: ");
-    int col = intScanner.nextInt() - 1;
+    Scanner strScanner = new Scanner(System.in);
+    System.out.print("\u001B[37m");
+
+    System.out.print("\nenter row letter: ");
+    String rowString = strScanner.next();
+    quitTest(rowString);
+    int row = rowString.charAt(0) - 97;
+
+    System.out.print("enter column number: ");
+    String colString = strScanner.next();
+    int col = quitTest(colString) - 1;
     // intScanner.close();
 
     if (section[row][col] == 1) { // seat taken
       String occupiedMsg = "Seat is occupied.";
       IllegalArgumentException occupiedException = new IllegalArgumentException(occupiedMsg);
       throw occupiedException;
-    } 
+    }
     section[row][col] = 1;
     System.out.println("Seat booked successfully.");
   }
-
 
   // prepopulate seats by section, demand determines how full that section will be
   static void prePopulate(int[][] section, int demand) {
@@ -133,66 +168,76 @@ public class BookingSystem {
       System.out.print("\n");
     }
     System.out.print("\n");
+    System.out.print("\u001B[37m");
   }
 
-    // printSection for "zooming" in to section and booking it and stuff
-    static void printSection(int[][] section) {
-      System.out.print("\033[H\033[2J");
-      System.out.print("   ");
-      for (int i = 0; i < section[0].length; i++) {
-        if (i < 9) {
-          System.out.print((i + 1) + "  ");
-        } else {
-          System.out.print((i + 1) + " ");
-        }
-        
+  // printSection for "zooming" in to section and booking it and stuff
+  static void printSection(int[][] section) {
+    // System.out.print("\033[H\033[2J");
+    System.out.print("   ");
+    for (int i = 0; i < section[0].length; i++) {
+      if (i < 9) {
+        System.out.print((i + 1) + "  ");
+      } else {
+        System.out.print((i + 1) + " ");
+      }
+
+    }
+    System.out.print("\n");
+
+    for (int i = 0; i < section.length; i++) {
+      System.out.print("\u001B[37m" + (char) (i + 65) + "  "); // row numbers
+      for (int j = 0; j < section[0].length; j++) {
+        printSeat(section[i][j]);
+        System.out.print("  ");
       }
       System.out.print("\n");
-
-      for (int i = 0; i < section.length; i++) {
-        System.out.print("\u001B[37m" + (char) (i + 65) + "  "); // row numbers
-        for (int j = 0; j < section[0].length; j++) {
-          printSeat(section[i][j]);
-          System.out.print("  ");
-        }
-        System.out.print("\n");
-      }
     }
+  }
 
   static void printSeat(int seat) {
     if (seat == 0) {
       System.out.print("\u001B[32m0"); // green (open)
-    }
-    else if (seat == 1) {
+    } else if (seat == 1) {
       System.out.print("\u001B[31m1"); // red (taken)
     }
   }
 
+  static int quitTest(String input) {
+    try {
+      if (input.charAt(0) == 'q') {
+        System.out.println("\nquitting...\n");
+        System.exit(0);
+      } else {
+        return Integer.parseInt(input);
+      }
+    } catch (NumberFormatException e) {
+
+    }
+    return 0;
+  }
+
 }
 
-
-
-
-
 /*
-3 seating sections
-  - main
-  - right
-  - left
-  - back/balcony
-  like:
-
-              [screen]
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   llll mmmmmmmmmmmmmmmmmmmm rrrr
-   bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-   bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-
-- make the taken seats red or som
-*/
+ * 3 seating sections
+ * - main
+ * - right
+ * - left
+ * - back/balcony
+ * like:
+ * 
+ * [screen]
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * llll mmmmmmmmmmmmmmmmmmmm rrrr
+ * bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ * bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ * 
+ * - make the taken seats red or som
+ */
