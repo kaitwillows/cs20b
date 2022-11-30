@@ -2,8 +2,9 @@
 
 public class Fish {
 	//Instant fields.
-	private int age;
-	private String name;
+	protected int age;
+	protected String name;
+
 	
 
 	// Constructor that takes no parameter.
