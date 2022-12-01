@@ -1,4 +1,7 @@
 public class FlyFish extends Fish {
+  public FlyFish(int age, String name) {
+    super(age, name); // call superclass constructor
+  }
   public FlyFish() {
     super(); // call superclass constructor
   }
