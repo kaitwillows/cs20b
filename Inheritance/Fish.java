@@ -9,7 +9,7 @@ public class Fish {
 
 	// Constructor that takes no parameter.
 	public Fish(){
-		name = "Fish.";
+		name = "Fish";
 		age = 1;
 	}
 	

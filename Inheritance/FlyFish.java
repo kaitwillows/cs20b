@@ -1,11 +1,13 @@
 public class FlyFish extends Fish {
   public FlyFish() {
-    super();
+    super(); // call superclass constructor
   }
-  public void greeting() {
+
+  public void greeting() { // overwritten from Fish
     System.out.println("yay, i can flyyyyy");
   }
 
+  // fly picks a number 1-4 and "jumps" that number of times
   public int fly() {
     int jumps = (int)(Math.random() * 5);
     System.out.print(name + " ");
