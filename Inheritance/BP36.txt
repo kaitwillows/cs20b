@@ -1,6 +1,0 @@
-# BP 36-6 - excersise a
-
-1. Green. It is inherited by Red.
-2. Red. It inherits Green.
-3. Green. Bass class = superclass
-4. derived class???????????

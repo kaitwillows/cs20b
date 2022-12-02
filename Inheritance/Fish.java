@@ -2,15 +2,12 @@
 
 public class Fish {
 	//Instant fields.
-	private int age;
-	private String name;
+	protected int age;
+	protected String name;
+
 	
 
-	// Constructor that takes no parameter.
-	public Fish(){
-		name = "Fish.";
-		age = 1;
-	}
+	
 	
 	// Constructor.
 	public Fish(int age, String name){
@@ -18,7 +15,11 @@ public class Fish {
 		this.name = name;
 	}
 	
-	
+	// Constructor that takes no parameter.
+	public Fish(){
+		name = "Fish";
+		age = 1;
+	}
 	
 
 	// overwrite this method in sub-class
