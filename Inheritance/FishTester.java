@@ -38,7 +38,6 @@ public class FishTester {
 
           System.out.println(mike.toString());
           mike.greeting();
-          System.out.println("");
           break;
         case 3: // adds fish based on user inputs 
           // add fish (in switch statement later idk)
