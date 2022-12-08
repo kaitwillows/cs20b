@@ -9,7 +9,7 @@ class Caviar extends Food implements LuxuryItem {
   }
 
   public void setOrigin(String origin) {
-    origin = this.origin;
+    this.origin = origin;
   }
 
   public String getOrigin() {

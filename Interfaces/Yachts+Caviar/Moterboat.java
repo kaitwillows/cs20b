@@ -1,4 +1,5 @@
 class Moterboat extends Boat {
+
   int seats;
 
   // constructor
