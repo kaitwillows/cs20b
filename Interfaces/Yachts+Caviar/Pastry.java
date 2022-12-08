@@ -10,7 +10,7 @@ class Pastry extends Food {
   // constructor calls super() and adds flavour
   Pastry(String name, double cost, int calories, String flavour) {
     super(name, cost, calories);
-    flavour = this.flavour;
+    this.flavour = flavour;
   }
 
   public void setFlavour(String flavour) {
@@ -22,6 +22,6 @@ class Pastry extends Food {
   }
 
   public String toString() {
-    return name + " -- Cost: $" + cost + " Calories: " + calories + " Flavour: " + flavour;
+    return name + " -- Cost: $" + cost + "  Calories: " + calories + "  Flavour: " + flavour;
   }
 }
