@@ -1,13 +1,23 @@
 class Caviar extends Food implements LuxuryItem {
-  public Caviar(String name, double cost, int calories, String origin) {
-    super(name, cost, calories);
-    String origin = this.origin;
-  }
-
-  
 
   String origin;
+
+  // constructor 
+  public Caviar(String name, double cost, int calories, String origin) {
+    super(name, cost, calories);
+    this.origin = origin;
+  }
+
+  public void setOrigin(String origin) {
+    origin = this.origin;
+  }
+
+  public String getOrigin() {
+    return origin;
+  }
+
   public double calculateLuxuryTax() {
-    return 7;
+    final double TAX_AMOUNT = cost * 0.15; // tax excludes cost (total = TAX_AMOUNT + cost)
+    return TAX_AMOUNT;
   }
 }
