@@ -1,5 +1,4 @@
-interface Sports {
-  void method1();
+interface Sports { void method1();
 
   void method2();
 
