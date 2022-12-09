@@ -17,7 +17,7 @@ class Yacht extends Boat implements LuxuryItem {
   }
 
   public String toString() {
-    return name+" -- Cost: $"+cost+" Horsepower: "+horsepower+"Cabins: "+cabins;
+    return name+" -- Cost: $"+cost+" Horsepower: "+horsepower+" Cabins: "+cabins;
   }
 
   public double calculateLuxuryTax() {
@@ -25,5 +25,8 @@ class Yacht extends Boat implements LuxuryItem {
     return TAX_AMOUNT;
   }
 
+  public String getDescription() {
+    return cabins + "-cabin " + horsepower + " horsepower yacht " + name + ":                $" + cost + calculateLuxuryTax() + "0 **luxury tax included**"; 
+  }
   
 }

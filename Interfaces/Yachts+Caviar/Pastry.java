@@ -24,4 +24,9 @@ class Pastry extends Food {
   public String toString() {
     return name + " -- Cost: $" + cost + "  Calories: " + calories + "  Flavour: " + flavour;
   }
+  
+  public String getDescription() {
+    return calories + " calorie " + flavour + " " + name + ": $" + cost;
+  }
+
 }

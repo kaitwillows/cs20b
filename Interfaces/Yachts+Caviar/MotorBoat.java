@@ -1,9 +1,9 @@
-class Moterboat extends Boat {
+class MotorBoat extends Boat {
 
   int seats;
 
   // constructor
-  public Moterboat(String name, double cost, int horsepower, int seats) {
+  public MotorBoat(String name, double cost, int horsepower, int seats) {
     super(name, cost, horsepower);
     this.seats = seats;
   }
@@ -20,4 +20,8 @@ class Moterboat extends Boat {
     return name + " -- Cost: $" + cost + " horsepower: " + horsepower + " seats: " + seats;
   }
  
+  public String getDescription() {
+    return seats + "-seat " + horsepower + " horsepower motorboat " + name + ":             $" + cost + "0";
+  }
+
 }
