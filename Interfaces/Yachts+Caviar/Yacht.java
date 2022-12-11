@@ -26,7 +26,7 @@ class Yacht extends Boat implements LuxuryItem {
   }
 
   public String getDescription() {
-    return cabins + "-cabin " + horsepower + " horsepower yacht " + name + ":                $" + cost + calculateLuxuryTax() + "0 **luxury tax included**"; 
+    return cabins + "-cabin " + horsepower + " horsepower yacht " + name + ":                $" + (cost + calculateLuxuryTax()) + "0 **luxury tax included**"; 
   }
   
 }

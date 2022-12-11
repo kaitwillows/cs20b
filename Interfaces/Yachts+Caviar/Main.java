@@ -1,3 +1,4 @@
+import java.lang.Math;
 class Main {
 	public static void main(String[] args) {
     System.out.println(""); // new line
@@ -25,12 +26,12 @@ class Main {
 
     // totaling
     double subtotal = pastryItem.cost + motorItem.cost + yachtItem.cost + yachtItem.calculateLuxuryTax() + fishItem.cost + fishItem.calculateLuxuryTax();
-    double tax = subtotal * 0.08;
+    double tax = Math.round(subtotal * 0.08);
     double grandTotal = subtotal + subtotal;
 
-    System.out.println("Sub Total:   " + subtotal);
-    System.out.println("Tax:         " + tax);
-    System.out.println("Grand Total: " + grandTotal);
+    System.out.println("Sub Total:                                            $" + subtotal);
+    System.out.println("Tax:                                                  $" + tax + "0");
+    System.out.println("Grand Total:                                          $" + grandTotal);
 
     System.out.println(""); // new line
 	}
