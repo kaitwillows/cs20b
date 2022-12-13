@@ -1,11 +1,10 @@
 
 interface Piece {
   // pieces should also include variables:
-  // int x (position)
-  // int y (position)
   // boolean piece side (should be able to be accessed by other pieces)
+  // char piece - something to print or be able to test for when looking at a square maybe idk maybe not
   boolean kingCheck();
   boolean moveCheck();
-  void movePiece();
+  // void movePiece(); this will have to happen in Board, where the board array is stored
 }
 
