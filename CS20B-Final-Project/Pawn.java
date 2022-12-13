@@ -4,4 +4,16 @@ class Pawn implements Piece {
   public Pawn(boolean sideWhite) {
     this.sideWhite = sideWhite;
   }
+
+  boolean moveCheck() {
+    if (sideWhite) {
+      
+    } else {
+
+    }
+  }
+
 }
+
+// sidewhite
+//
