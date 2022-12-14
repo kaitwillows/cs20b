@@ -11,7 +11,10 @@ it mimicks the numberpad on a standard keyboard
 */
 
 public class moveCheckUtil {
-  int linear(int direction, boolean isWhite) {
+  // linear will return 0 if:
+  // a piece has been "stepped over" or
+  // the piece landed on is an ally
+  static int linear(int direction, boolean isWhite) {
 
   }
 }
