@@ -1,14 +1,14 @@
 class Pawn implements Piece {
-  boolean sideWhite;
+  boolean isWhite;
 
-  public Pawn(boolean sideWhite) {
-    this.sideWhite = sideWhite;
+  public Pawn(boolean isWhite) {
+    this.isWhite = isWhite;
   }
 
-  public boolean moveCheck() {
-    if (sideWhite) {
+  public void moveCheck() {
+    if (isWhite) { // the pawn is white
       
-    } else {
+    } else { // the pawn is black
 
     }
   }
