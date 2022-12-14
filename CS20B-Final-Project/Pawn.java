@@ -5,7 +5,7 @@ class Pawn implements Piece {
     this.sideWhite = sideWhite;
   }
 
-  boolean moveCheck() {
+  public boolean moveCheck() {
     if (sideWhite) {
       
     } else {

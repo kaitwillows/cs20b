@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-class Board {
+class GUI {
   public static void main(String[] args) {
     JFrame board = new JFrame("test");
     board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
