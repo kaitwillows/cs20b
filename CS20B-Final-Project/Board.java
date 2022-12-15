@@ -1,10 +1,11 @@
-// Board is responcible for the creation and modification of the game
+// Board is responsible for the creation and modification of the game
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 class Board {
   
-  ArrayList<ArrayList> board = new ArrayList<ArrayList>();
+  // ArrayList<ArrayList<Piece>> board = new ArrayList<ArrayList<Piece>>();
+  Piece[][] board = new Piece[7][7];
 
   final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
 
@@ -18,14 +19,18 @@ class Board {
   void initilizeBoard(String boardString) {
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
-        System.out.print(boardString.charAt(8*i+j));
-
-        // TODO: when all piece class exist, create a switch statement that adds an instance of each piece to the board arraylist
+        char pieceChar = boardString.charAt(8*i+j);
+        switch (pieceChar) { // initilize a...
+          case 'P': // white pawn
+            board[i][j] = new Pawn(true);
+            break;
+        }
+        
       }
     }
   }
   
-  public static void main(String[] args) {
+  public static void main(String[] args) { // for testing
     Board board = new Board(true);
   }
 }
