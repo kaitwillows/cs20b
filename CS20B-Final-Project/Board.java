@@ -31,10 +31,26 @@ class Board {
         
       }
     }
+
+    printBoard();
+  }
+
+  void printBoard() {
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        try {
+          System.out.print(board[i][j].getPieceChar());
+        }
+        catch(NullPointerException e) { // for the blank spaces probably
+          System.out.print(" ");
+        }
+      }
+      System.out.print("\n");
+    }
   }
   
   public static void main(String[] args) { // for testing
-    Board board = new Board(true);
+    Board board = new Board(true); // default board
   }
 }
 

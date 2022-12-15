@@ -15,7 +15,9 @@ public class moveCheckUtil {
   // a piece has been "stepped over" or
   // the piece landed on is an ally
   static int linear(int direction, boolean isWhite) {
-
+    // TODO
+    // this is gonna be fun
+    // no, like seriously, you got this
   }
 }
 

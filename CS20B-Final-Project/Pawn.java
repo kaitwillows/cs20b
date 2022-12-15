@@ -1,11 +1,19 @@
-class Pawn implements Piece {
+class Pawn extends Piece {
   boolean isWhite;
+  char pieceChar;
+
+
 
   public Pawn(boolean isWhite) {
     this.isWhite = isWhite;
+    if (isWhite) {
+      pieceChar = 'P';
+    } else {
+      pieceChar = 'p';
+    }
   }
 
-  public void moveCheck() {
+  void moveCheck() {
     if (isWhite) { // the pawn is white
       
     } else { // the pawn is black
@@ -13,6 +21,9 @@ class Pawn implements Piece {
     }
   }
 
+  public char getPieceChar() {
+    return pieceChar;
+  }
 }
 
 // sidewhite
