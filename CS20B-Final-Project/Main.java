@@ -1,5 +1,7 @@
 class Main {
   public static void main(String[] args) {
-    System.out.println("hello world");
+    Board gameObj = new Board(true);
+    gameObj.printBoard();
+    
   }
 }

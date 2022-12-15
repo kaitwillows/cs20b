@@ -1,22 +1,22 @@
-class Pawn extends Piece {
+class Bishop extends Piece {
   boolean isWhite;
   char pieceChar;
 
 
 
-  public Pawn(boolean isWhite) {
+  public Bishop(boolean isWhite) {
     this.isWhite = isWhite;
     if (isWhite) {
-      pieceChar = 'P';
+      pieceChar = 'B';
     } else {
-      pieceChar = 'p';
+      pieceChar = 'b';
     }
   }
 
   void moveCheck() {
-    if (isWhite) { // the pawn is white
+    if (isWhite) { // the piece is white
       
-    } else { // the pawn is black
+    } else { // the piece is black
 
     }
   }

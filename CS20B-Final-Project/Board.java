@@ -10,6 +10,7 @@ class Board {
   final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
 
 
+
   public Board(boolean useDefaultBoard) {
     if (useDefaultBoard) {
       initilizeBoard(DEFAULT_BOARD);
@@ -24,15 +25,45 @@ class Board {
         // System.out.print(i + " " + j + "\n ");
 
         switch (pieceChar) { // initilize a...
-          case 'P': // white pawn
+          case 'P': // pawn
             board[i][j] = new Pawn(true);
             break;
+          case 'p':
+            board[i][j] = new Pawn(false);
+            break;
+          case 'R': // rook
+            board[i][j] = new Rook(true);
+            break;
+          case 'r':
+            board[i][j] = new Rook(false);
+            break;
+          case 'N': // knight
+            board[i][j] = new Knight(true);
+            break;
+          case 'n':
+            board[i][j] = new Knight(false);
+            break;
+          case 'B': // bishop
+            board[i][j] = new Bishop(true);
+            break;
+          case 'b':
+            board[i][j] = new Bishop(false);
+            break;
+          case 'Q': // queen
+            board[i][j] = new Queen(true);
+            break;
+          case 'q':
+            board[i][j] = new Queen(false);
+            break;
+          case 'K': // king
+            board[i][j] = new King(true);
+            break;
+          case 'k':
+            board[i][j] = new King(false);
+            break;
         }
-        
       }
     }
-
-    printBoard();
   }
 
   void printBoard() {
@@ -49,9 +80,6 @@ class Board {
     }
   }
   
-  public static void main(String[] args) { // for testing
-    Board board = new Board(true); // default board
-  }
 }
 
 // this class will initilize the board by creating all the neccisary piece objects in an array list (which is capable of holding objects within itself)
