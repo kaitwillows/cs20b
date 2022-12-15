@@ -20,11 +20,15 @@ class Board {
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
         char pieceChar = boardString.charAt(8*i+j);
-        switch (pieceChar) { // initilize a...
-          case 'P': // white pawn
-            board[i][j] = new Pawn(true);
-            break;
-        }
+        //debg
+        System.out.print(i + " " + j + "\n ");
+
+        //debg
+        // switch (pieceChar) { // initilize a...
+        //   case 'P': // white pawn
+        //     board[i][j] = new Pawn(true);
+        //     break;
+        // }
         
       }
     }
