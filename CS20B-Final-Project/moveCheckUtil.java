@@ -15,22 +15,33 @@ public class moveCheckUtil {
   // a piece has been "stepped over" or
   // the piece landed on is an ally
   // canTake -1 = cannot, 0 = black, 1 = white
-  static int linear(Piece[][] board, int xCord, int yCord, int direction, int spaces, boolean isWhite) {
+  static int linear(Piece[][] board, int col, int row, int direction, int spaces, boolean isWhite) {
+    System.out.println("piece chosen is a " + board[row][col].getPieceChar());
     // TODO
     switch (direction) {
       case 8: // up, y is variable
-        for (int i = 0; i < spaces; i++) {
-          if (!(board[i+1][xCord] instanceof Piece)) { // if the space in front is empty, move ahead
+        for (int i = row; i < spaces + row; i--) {
+          if (i == row) { // if we haven't moved, move ahead
+            continue;
+          }
+          else if (!(board[i][col] instanceof Piece)) { // this space is empty, move ahead
             continue;
           } 
-          else if (board[i+1][xCord].getIsWhite() == isWhite) { // if the piece ahead is/isnt an ally
-            
+          else if (board[i][col].getIsWhite() == isWhite) { // if this piece is an ally, break
+            return 0; // illegal
+          }
+          if (board[i][col].getPieceChar() == 'K' || board[i][col].getPieceChar() == 'k') { // if this piece is the enemy king
+            return -1; // the king is in check
+          }
+          else { // the current piece is an enemy
+            System.out.println("ayo dont skip me hello??");
           }
         }
+        return 1; // the move is legal
         
     }
 
-    System.out.println(board[0][0].getPieceChar());
+
     return 0;
   }
 }

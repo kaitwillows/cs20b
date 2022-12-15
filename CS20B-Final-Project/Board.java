@@ -7,7 +7,8 @@ class Board {
   // ArrayList<ArrayList<Piece>> board = new ArrayList<ArrayList<Piece>>();
   Piece[][] board = new Piece[8][8];
 
-  final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
+  // final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
+  final String DEFAULT_BOARD = "rnbqkbnrpppppppp            q                       Q           ";
 
 
 
@@ -80,6 +81,9 @@ class Board {
     }
   }
   
+  void testMove() {
+    System.out.println("linear returned " + moveCheckUtil.linear(board, 4, 6, 8, 3, true));
+  }
 }
 
 // this class will initilize the board by creating all the neccisary piece objects in an array list (which is capable of holding objects within itself)
