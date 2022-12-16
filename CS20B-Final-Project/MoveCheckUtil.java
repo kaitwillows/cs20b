@@ -83,7 +83,7 @@ public class MoveCheckUtil {
         return 1; // the move is legal
 
       case 2: // DOWN, y is variable
-        for (int i = row1; i < row1 - spaces; i++) {
+        for (int i = row1; i < row1 + spaces; i++) {
           if (i == row1) { // if we haven't moved, move ahead
             continue;
           }
@@ -96,7 +96,7 @@ public class MoveCheckUtil {
           if (board[i][col1].getPieceChar() == 'K' || board[i][col1].getPieceChar() == 'k') { // if this piece is the enemy king
             return -1; // the king is in check
           }
-          else if (i+1 == row1 - spaces) { // the piece is trying to move past an enemy piece
+          else if (i+1 == row1 + spaces) { // the piece is trying to move past an enemy piece
             return 0; // illegal;
           }
         }
@@ -111,9 +111,9 @@ public class MoveCheckUtil {
 00 01 02 03 04 05 06 07 
 10 11 12 13 14 15 16 17
 20 21 22 23 24 25 26 27
-30 31 32 33 34 35 36 37 -- break here
+30 31 32 33 34 35 36 37
 40 41 42 43 44 45 46 47
 50 51 52 53 54 55 56 57
-60 61 62 63 64 65 66 67 -- start
+60 61 62 63 64 65 66 67
 70 71 72 73 74 75 76 77
 */
