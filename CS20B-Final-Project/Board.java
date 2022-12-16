@@ -81,8 +81,15 @@ class Board {
     }
   }
   
-  void testMove() {
-    System.out.println("linear returned " + moveCheckUtil.linear(board, 4, 6, 8, 3, true));
+  void testMove() { // for testing; this needs a better implementation
+    int r1 = 6;
+    int c1 = 4;
+    int r2 = 2;
+    int c2 = 4;
+    if (moveCheckUtil.linear(board, c1, r1, 8, 4, true) == 1) { // piece at 4, 6, move up(8) 1 time(s)
+      board[r2][c2] = board[r1][c1];
+      board[r1][c1] = null;
+    }
   }
 }
 
