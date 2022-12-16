@@ -15,27 +15,30 @@ public class moveCheckUtil {
   // a piece has been "stepped over" or
   // the piece landed on is an ally
   // canTake -1 = cannot, 0 = black, 1 = white
-  static int linear(Piece[][] board, int col, int row, int direction, int spaces, boolean isWhite) {
-    // TODO: remove isWhite as an argument; calculate it from in here
+  static int linear(Piece[][] board, int row1, int col1, int direction, int spaces) {
+    // get side variable
+    boolean isWhite = board[row1][col1].getIsWhite();
     // TODO: add code to determine what direction and how many spaces to move
+    // find the direction
+    
       // for straights, if any cords are equal, find the difference; (direction and spaces)
       // for diagonals, if the diff from start to end is equal for both cords, find which is greater for each
     switch (direction) {
       case 8: // up, y is variable
-        for (int i = row; i > row - spaces; i--) {
-          if (i == row) { // if we haven't moved, move ahead
+        for (int i = row1; i > row1 - spaces; i--) {
+          if (i == row1) { // if we haven't moved, move ahead
             continue;
           }
-          else if (!(board[i][col] instanceof Piece)) { // this space is empty, move ahead
+          else if (!(board[i][col1] instanceof Piece)) { // this space is empty, move ahead
             continue;
           } 
-          else if (board[i][col].getIsWhite() == isWhite) { // if this piece is an ally, break
+          else if (board[i][col1].getIsWhite() == isWhite) { // if this space is an ally, break
             return 0; // illegal
           }
-          if (board[i][col].getPieceChar() == 'K' || board[i][col].getPieceChar() == 'k') { // if this piece is the enemy king
+          if (board[i][col1].getPieceChar() == 'K' || board[i][col1].getPieceChar() == 'k') { // if this piece is the enemy king
             return -1; // the king is in check
           }
-          else if (i-1 == row - spaces) { // the piece is trying to move past an enemy piece
+          else if (i-1 == row1 - spaces) { // the piece is trying to move past an enemy piece
             return 0; // illegal;
           }
         }
