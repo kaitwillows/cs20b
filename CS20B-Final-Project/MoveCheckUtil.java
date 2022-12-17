@@ -11,10 +11,10 @@ it mimicks the numberpad on a standard keyboard
 */
 
 public class MoveCheckUtil {
-  // linear will return 0 if:
-  // a piece has been "stepped over" or
-  // the piece landed on is an ally
-  // canTake -1 = cannot, 0 = black, 1 = white
+  // int linear() checks if a piece moving in a linear fasion is making a legal move:
+  // returns 1 if the move is legal
+  // returns 0 if the move is illegal *should throw an error higher up which will be caught
+  // returns 
   static int linear(Piece[][] board, int row1, int col1, int row2, int col2) {
 
     // variable declarations/initilization
@@ -58,6 +58,7 @@ public class MoveCheckUtil {
       spaces = Math.abs(row1 - row2);
     }
 
+    int j = 0; // avoids duplicate variable declaration for diagonal moves
 
     // knowing the direction, and distance (spaces) of the move, check if its legal
     switch (direction) {
@@ -82,7 +83,7 @@ public class MoveCheckUtil {
         return 1; // the move is legal
 
       case 2: // DOWN, y is variable
-        for (int i = row1; i >= row2; i++) {
+        for (int i = row1; i <= row2; i++) {
           if (i == row1) { // if we haven't moved, move ahead
             continue;
           }
@@ -101,6 +102,137 @@ public class MoveCheckUtil {
         }
         return 1; // the move is legal
 
+      case 4: // LEFT, x/col is decreasing
+        for (int i = col1; i >= col2; i--) {
+          if (i == col1) { // if we haven't moved, move ahead
+            continue;
+          }
+          else if (!(board[row1][i] instanceof Piece)) { // this space is empty, move ahead
+            continue;
+          } 
+          else if (board[row1][i].getIsWhite() == isWhite) { // if this space is an ally, break
+            return 0; // illegal
+          }
+          if (board[row1][i].getPieceChar() == 'K' || board[row1][i].getPieceChar() == 'k') { // if this piece is the enemy king
+            return -1; // the king is in check
+          }
+          else if (i-1 >= col2) { // the piece is trying to move past an enemy piece
+            return 0; // illegal;
+          }
+        }
+        return 1; // the move is legal
+
+      case 6: // RIGHT, x/col is increasing
+        for (int i = col1; i <= col2; i++) {
+          if (i == col1) { // if we haven't moved, move ahead
+            continue;
+          }
+          else if (!(board[row1][i] instanceof Piece)) { // this space is empty, move ahead
+            continue;
+          } 
+          else if (board[row1][i].getIsWhite() == isWhite) { // if this space is an ally, break
+            return 0; // illegal
+          }
+          if (board[row1][i].getPieceChar() == 'K' || board[row1][i].getPieceChar() == 'k') { // if this piece is the enemy king
+            return -1; // the king is in check
+          }
+          else if (i+1 <= col2) { // the piece is trying to move past an enemy piece
+            return 0; // illegal;
+          }
+        }
+        return 1; // the move is legal
+
+
+      // DIAGONAL CASES
+
+      
+      case 7: // UP-LEFT, both are decreasing
+        j = col1;
+        for (int i = row1; i >= row2; i--, j--) { // init i as the spot, move untill 
+
+          if (i == row1) { // if we haven't moved, move ahead
+            continue;
+          }
+          else if (!(board[i][j] instanceof Piece)) { // this space is empty, move ahead
+            continue;
+          } 
+          else if (board[i][j].getIsWhite() == isWhite) { // if this space is an ally, break
+            return 0; // illegal
+          }
+          if (board[i][j].getPieceChar() == 'K' || board[i][j].getPieceChar() == 'k') { // if this piece is the enemy king
+            return -1; // the king is in check
+          }
+          else if (i-1 >= row2) { // the piece is trying to move past an enemy piece
+            return 0; // illegal;
+          }
+        }
+        return 1; // the move is legal
+
+      case 9: // UP-RIGHT, i/y/row is decreasing, j/x/col is increasing
+        j = col1;
+        for (int i = row1; i >= row2; i--, j++) { // init i as the spot, move untill 
+
+          if (i == row1) { // if we haven't moved, move ahead
+            continue;
+          }
+          else if (!(board[i][j] instanceof Piece)) { // this space is empty, move ahead
+            continue;
+          } 
+          else if (board[i][j].getIsWhite() == isWhite) { // if this space is an ally, break
+            return 0; // illegal
+          }
+          if (board[i][j].getPieceChar() == 'K' || board[i][j].getPieceChar() == 'k') { // if this piece is the enemy king
+            return -1; // the king is in check
+          }
+          else if (i-1 >= row2) { // the piece is trying to move past an enemy piece
+            return 0; // illegal;
+          }
+        }
+        return 1; // the move is legal
+
+      case 1: // DOWN-LEFT, i/y/row is increasing, j/x/col is decreasing
+        j = col1;
+        for (int i = row1; i <= row2; i++, j--) { // init i as the spot, move untill 
+
+          if (i == row1) { // if we haven't moved, move ahead
+            continue;
+          }
+          else if (!(board[i][j] instanceof Piece)) { // this space is empty, move ahead
+            continue;
+          } 
+          else if (board[i][j].getIsWhite() == isWhite) { // if this space is an ally, break
+            return 0; // illegal
+          }
+          if (board[i][j].getPieceChar() == 'K' || board[i][j].getPieceChar() == 'k') { // if this piece is the enemy king
+            return -1; // the king is in check
+          }
+          else if (i+1 <= row2) { // the piece is trying to move past an enemy piece
+            return 0; // illegal;
+          }
+        }
+        return 1; // the move is legal
+      
+      case 3: // DOWN-RIGHT, both are decreasing
+        j = col1;
+        for (int i = row1; i >= row2; i--, j--) { // init i as the spot, move untill 
+
+          if (i == row1) { // if we haven't moved, move ahead
+            continue;
+          }
+          else if (!(board[i][j] instanceof Piece)) { // this space is empty, move ahead
+            continue;
+          } 
+          else if (board[i][j].getIsWhite() == isWhite) { // if this space is an ally, break
+            return 0; // illegal
+          }
+          if (board[i][j].getPieceChar() == 'K' || board[i][j].getPieceChar() == 'k') { // if this piece is the enemy king
+            return -1; // the king is in check
+          }
+          else if (i-1 >= row2) { // the piece is trying to move past an enemy piece
+            return 0; // illegal;
+          }
+        }
+        return 1; // the move is legal
     }
     return 0;
   }
