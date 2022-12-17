@@ -8,7 +8,7 @@ class Board {
   Piece[][] board = new Piece[8][8];
 
   // final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
-  final String DEFAULT_BOARD = "rnbqkbnrpppppppp            q                       Q           ";
+  final String DEFAULT_BOARD = "                            q                       Q           ";
 
 
 
@@ -82,9 +82,9 @@ class Board {
   }
   
   void testMove() { // for testing; this needs a better implementation
-    int r1 = 3;
+    int r1 = 6;
     int c1 = 4;
-    int r2 = 1;
+    int r2 = 5;
     int c2 = 4;
     if (MoveCheckUtil.linear(board, r1, c1, r2, c2) == 1) { // piece at 4, 6, move up(8) 1 time(s)
       System.out.println("great success");

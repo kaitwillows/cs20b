@@ -27,7 +27,6 @@ public class MoveCheckUtil {
     // find the direction
       // vertical/horizontal moves:
     if (col1 == col2 && row1 == row2) { //the piece isn't moving
-      direction = 5;
       return 0; // ILLEGAL
     } else if (col1 == col2 && row1 > row2) { // moving up
       direction = 8;
@@ -63,7 +62,7 @@ public class MoveCheckUtil {
     // knowing the direction, and distance (spaces) of the move, check if its legal
     switch (direction) {
       case 8: // UP, y is variable
-        for (int i = row1; i > row1 - spaces; i--) {
+        for (int i = row1; i >= row2; i--) { // init i as the spot, move untill 
           if (i == row1) { // if we haven't moved, move ahead
             continue;
           }
@@ -76,14 +75,14 @@ public class MoveCheckUtil {
           if (board[i][col1].getPieceChar() == 'K' || board[i][col1].getPieceChar() == 'k') { // if this piece is the enemy king
             return -1; // the king is in check
           }
-          else if (i-1 == row1 - spaces) { // the piece is trying to move past an enemy piece
+          else if (i-1 >= row2) { // the piece is trying to move past an enemy piece
             return 0; // illegal;
           }
         }
         return 1; // the move is legal
 
       case 2: // DOWN, y is variable
-        for (int i = row1; i < row1 + spaces; i++) {
+        for (int i = row1; i >= row2; i++) {
           if (i == row1) { // if we haven't moved, move ahead
             continue;
           }
@@ -96,7 +95,7 @@ public class MoveCheckUtil {
           if (board[i][col1].getPieceChar() == 'K' || board[i][col1].getPieceChar() == 'k') { // if this piece is the enemy king
             return -1; // the king is in check
           }
-          else if (i+1 == row1 + spaces) { // the piece is trying to move past an enemy piece
+          else if (i+1 >= row2) { // the piece is trying to move past an enemy piece
             return 0; // illegal;
           }
         }
