@@ -19,10 +19,10 @@ public class MoveCheckUtil {
 
     // variable declarations/initilization
     int direction = 5;
-    int spaces = 0;
 
     // get side variable
     boolean isWhite = board[row1][col1].getIsWhite();
+    char pieceChar = board[row1][col1].getPieceChar();
 
     // find the direction
       // vertical/horizontal moves:
@@ -30,32 +30,29 @@ public class MoveCheckUtil {
       return 0; // ILLEGAL
     } else if (col1 == col2 && row1 > row2) { // moving up
       direction = 8;
-      spaces = Math.abs(row1 - row2);
     } else if (col1 == col2 && row1 < row2) { // moving down
       direction = 2;
-      spaces = Math.abs(row1 - row2);
     } else if (col1 > col2 && row1 == row2) { // moving left
       direction = 4;
-      spaces = Math.abs(col1 - col2);
     } else if (col1 < col2 && row1 == row2) { // moving right
       direction = 6;
-      spaces = Math.abs(col1 - col2);
     }
       // diagonal moves:
     else if (!(Math.abs(row1 - row2) == Math.abs(col1 - col2))) { // the piece isn't moving the same amount of rows as columns
       return 0; // not a linear move
     } else if (row1 > row2 && col1 > col2) { // up-left
       direction = 7;
-      spaces = Math.abs(row1 - row2);
     } else if (row1 > row2 && col1 < col2) { // up-right
       direction = 9;
-      spaces = Math.abs(row1 - row2);
     } else if (row1 < row2 && col1 > col2) { // down-left
       direction = 1;
-      spaces = Math.abs(row1 - row2);
     } else if (row1 < row2 && col1 < col2) { // down-right
       direction = 3;
-      spaces = Math.abs(row1 - row2);
+    }
+
+    // check if the piece is allowed to move in that direction
+    if (!validDirection(direction, pieceChar)) {
+      return 0; // the piece can't move in that direction
     }
 
     int j = 0; // avoids duplicate variable declaration for diagonal moves
@@ -237,6 +234,37 @@ public class MoveCheckUtil {
     return 0;
   }
 
+  static boolean validDirection(int direction, char pieceChar) {
+    switch (pieceChar) {
+      case 'R': // rook
+      case 'r':
+        switch (direction) {
+          case 8:
+          case 2:
+          case 4:
+          case 6:
+            return true;
+          default:
+            return false;
+        }
+      case 'B': // bishop
+      case 'b':
+        switch (direction) {
+          case 7:
+          case 9:
+          case 1:
+          case 3:
+            return true;
+          default:
+            return false;
+        }
+      case 'Q': // queen
+      case 'q':
+        return true;
+      default:
+        return false;
+    }
+  }
   static void movePiece(Piece[][] board, int row1, int col1, int row2, int col2) {
     board[row1][col1] = board[row1][col1];
     board[row1][col1] = null;

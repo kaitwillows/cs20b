@@ -81,6 +81,10 @@ class Board {
     }
   }
   
+  void move(Piece[][] board, int row1, int col1, int row2, int col2) { // im so tired rn
+    
+  }
+
   void testMove() { // for testing; this needs a WAY better implementation
     int r1 = 3;
     int c1 = 4;
