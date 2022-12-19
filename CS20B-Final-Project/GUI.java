@@ -1,65 +1,71 @@
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+public class GUI extends JPanel implements MouseListener {
+  private static final int SQUARE_SIZE = 50;
+  private static final int NUM_SQUARES = 8;
+  private static final int BOARD_SIZE = NUM_SQUARES * SQUARE_SIZE;
 
-class GUI {
-  public static int x;
-  public static int y;
-  public static void main(String[] args) {
-    JFrame board = new JFrame("test");
-    board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    board.setSize(512, 512);
-    
+  private int highlightX = -1;
+  private int highlightY = -1;
 
-    ImagePanel panel = new ImagePanel();
-    x = 0;
-    board.add(panel);
-    board.setVisible(true);
-
-    x = 99;
-    // try {
-    //   TimeUnit.MILLISECONDS.sleep(500);
-    // } 
-    // catch(InterruptedException e) {}
-    // x = 400;
-
-    // for (int i = 0; i < 512; i++) {
-    //   System.out.println(i);
-    //   x = i;
-    //   System.out.println(x);
-    //   System.out.println(" ");
-
-    //   try {
-    //     TimeUnit.MILLISECONDS.sleep(500);
-    //   } 
-    //   catch(InterruptedException e) {}
-
-    // }
+  public GUI() {
+    addMouseListener(this);
+    setPreferredSize(new Dimension(BOARD_SIZE, BOARD_SIZE));
   }
-}
 
-class ImagePanel extends JPanel {
-  private Image image;
+  @Override
+  public void paintComponent(Graphics g) {
+    super.paintComponent(g);
 
-  public ImagePanel() {
-    try {
-      image = ImageIO.read(new File("./black-square.png"));
-    } catch (IOException ex) {
-      ex.printStackTrace();
+    for (int i = 0; i < NUM_SQUARES; i++) {
+      for (int j = 0; j < NUM_SQUARES; j++) {
+        if ((i + j) % 2 == 0) {
+          g.setColor(Color.WHITE);
+        } else {
+          g.setColor(Color.BLACK);
+        }
+        g.fillRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+
+        if (i == highlightX && j == highlightY) {
+          g.setColor(Color.YELLOW);
+          g.drawRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        }
+      }
     }
   }
 
   @Override
-  protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    g.drawImage(image, GUI.x, GUI.y, this);
+  public void mouseClicked(MouseEvent e) {
+    highlightX = e.getX() / SQUARE_SIZE;
+    highlightY = e.getY() / SQUARE_SIZE;
+    System.out.println("Square clicked: (" + highlightX + ", " + highlightY + ")");
+    repaint();
+  }
+
+  @Override
+  public void mousePressed(MouseEvent e) {}
+
+  @Override
+  public void mouseReleased(MouseEvent e) {}
+
+  @Override
+  public void mouseEntered(MouseEvent e) {}
+
+  @Override
+  public void mouseExited(MouseEvent e) {}
+
+  public static void main(String[] args) {
+    JFrame frame = new JFrame("Chess Board");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.add(new GUI());
+    frame.pack();
+    frame.setVisible(true);
   }
 }
