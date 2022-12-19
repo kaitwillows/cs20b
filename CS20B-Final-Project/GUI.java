@@ -7,67 +7,59 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 class GUI {
   public static int x;
   public static int y;
-  public static boolean whiteSquare = true;
-
   public static void main(String[] args) {
     JFrame board = new JFrame("test");
     board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     board.setSize(512, 512);
+    
+
+    ImagePanel panel = new ImagePanel();
+    x = 0;
+    board.add(panel);
     board.setVisible(true);
 
-    ImagePanel painter = new ImagePanel();
+    x = 99;
+    // try {
+    //   TimeUnit.MILLISECONDS.sleep(500);
+    // } 
+    // catch(InterruptedException e) {}
+    // x = 400;
 
-    boolean whiteSquare = true;
-    x = 0;
-    y = 0;
-    board.add(painter);
+    // for (int i = 0; i < 512; i++) {
+    //   System.out.println(i);
+    //   x = i;
+    //   System.out.println(x);
+    //   System.out.println(" ");
 
+    //   try {
+    //     TimeUnit.MILLISECONDS.sleep(500);
+    //   } 
+    //   catch(InterruptedException e) {}
 
-    // set variables
-    for (int i = 0; i < 7; i++) {
-      for (int j = 0; j < 7; j++) {
-        x = i * 64;
-        y = j * 64;
-        // board.add(painter);
-        if (whiteSquare) { // flip flop
-
-          whiteSquare = false;
-        } else {
-
-          whiteSquare = true;
-        }
-      }
-    } 
-
-
-
+    // }
   }
 }
 
 class ImagePanel extends JPanel {
-  private Image whiteImage;
-  private Image blackImage;
+  private Image image;
+
   public ImagePanel() {
     try {
-      whiteImage = ImageIO.read(new File("./white-square.png"));
-      blackImage = ImageIO.read(new File("./black-square.png"));
+      image = ImageIO.read(new File("./black-square.png"));
     } catch (IOException ex) {
-      System.out.println("error at GUI:~29");
+      ex.printStackTrace();
     }
   }
 
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    if (GUI.whiteSquare) {
-      g.drawImage(whiteImage, GUI.x, GUI.y, this);
-    } else {
-      g.drawImage(blackImage, GUI.x, GUI.y, this);
-    }
+    g.drawImage(image, GUI.x, GUI.y, this);
   }
 }
