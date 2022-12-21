@@ -7,7 +7,7 @@ class Board {
   // ArrayList<ArrayList<Piece>> board = new ArrayList<ArrayList<Piece>>();
   Piece[][] board = new Piece[8][8];
 
-  final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
+  final String DEFAULT_BOARD = "rnbqkbnr                                                RNBQKBNR";
     //  final String DEFAULT_BOARD = "                            Q                                    ";
 
 
@@ -104,7 +104,7 @@ class Board {
     try {
       // the following line will throw an exception to main if the move is illegal or the king is in check, terminating the rest of the code
       board[row1][col1].moveCheck(board, row1, col1, row2, col2);
-      board[row1][col1] = board[row1][col1];
+      board[row2][col2] = board[row1][col1];
       board[row1][col1] = null;
     } catch (IllegalMoveException e) {
       throw e;
