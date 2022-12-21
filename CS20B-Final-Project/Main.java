@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 class Main {
+  char[] array = {'a', 'b', 'c', 'd'};
   public static void main(String[] args) {
     // System.out.println("how does print work");
     // GUI.main(null);

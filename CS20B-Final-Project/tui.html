@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array of Characters</title>
+</head>
+<body>
+    <div id="characters">
+        <!-- Loop through the array of characters and create a button for each character -->
+        <script>
+            // Replace "characters" with the actual array of characters from the Java program
+            var characters = ['a', 'b', 'c', 'd', 'e'];
+
+            // Loop through the array and create a button for each character
+            for (var i = 0; i < characters.length; i++) {
+                var btn = document.createElement("button");
+                btn.innerHTML = characters[i];
+                btn.onclick = function() {
+                    // When the button is clicked, send the index of the character back to the Java program
+                    window.location = "java://sendIndexToJava?index=" + i;
+                }
+                document.getElementById("characters").appendChild(btn);
+            }
+        </script>
+    </div>
+</body>
+</html>

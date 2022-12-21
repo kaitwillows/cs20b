@@ -294,7 +294,7 @@ public class MoveCheckUtil {
         number = 7 - (notation.charAt(4) - 49);
         break;
     }
-    if (number < 0 || number > 7) {
+    if (number < 0 || number > 7 || notation.length() != 5) {
       IllegalArgumentException e = new IllegalArgumentException("the move is out of bounds");
       throw e;
     }
