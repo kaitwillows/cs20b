@@ -6,5 +6,8 @@ class GUI {
     board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     board.setSize(512,512);
     board.setVisible(true);
+
+    ImageIcon blackSquare = new ImageIcon("./black-square.png");
+    board.drawImage
   }
 }
