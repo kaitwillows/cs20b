@@ -276,6 +276,30 @@ public class MoveCheckUtil {
     board[row1][col1] = board[row1][col1];
     board[row1][col1] = null;
   }
+
+  static int parseNotation(int returnAxis, String notation) {
+    // return axis can be 1-4
+    int number = -1;
+    switch (returnAxis) {
+      case 1:
+        number = notation.charAt(0) - 97;
+        break;
+      case 2:
+        number = 7 - (notation.charAt(1) - 49);
+        break;
+      case 3:
+        number = notation.charAt(3) - 97;
+        break;
+      case 4:
+        number = 7 - (notation.charAt(4) - 49);
+        break;
+    }
+    if (number < 0 || number > 7 || notation.length() != 5) {
+      IllegalArgumentException e = new IllegalArgumentException("the move is out of bounds");
+      throw e;
+    }
+    return number;
+  }
 }
 
 /*
