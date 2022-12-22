@@ -11,11 +11,15 @@ it mimicks the numberpad on a standard keyboard
 */
 
 public class MoveCheckUtil {
-  // int linear() checks if a piece moving in a linear fasion is making a legal move:
-  // returns 1 if the move is legal
-  // returns 0 if the move is illegal *should throw an error higher up which will be caught
-  // returns 
+  // check fot the legality of linear moves (diagonals and straights)
   static int linear(Piece[][] board, int row1, int col1, int row2, int col2) {
+    /*
+    linear() {
+      1. find the direction of the chosen move
+      2. check if the piece can move in that direction
+      3. use for loops to test if the move is valid
+    } 
+    */
 
     // variable declarations/initilization
     int direction = 5;
@@ -25,7 +29,7 @@ public class MoveCheckUtil {
     char pieceChar = board[row1][col1].getPieceChar();
 
     // find the direction
-      // vertical/horizontal moves:
+    // vertical/horizontal
     if (col1 == col2 && row1 == row2) { //the piece isn't moving
       return 0; // ILLEGAL
     } else if (col1 == col2 && row1 > row2) { // moving up
@@ -37,7 +41,7 @@ public class MoveCheckUtil {
     } else if (col1 < col2 && row1 == row2) { // moving right
       direction = 6;
     }
-      // diagonal moves:
+    // diagonal
     else if (!(Math.abs(row1 - row2) == Math.abs(col1 - col2))) { // the piece isn't moving the same amount of rows as columns
       return 0; // not a linear move
     } else if (row1 > row2 && col1 > col2) { // up-left
@@ -234,6 +238,7 @@ public class MoveCheckUtil {
     return 0;
   }
 
+  // check if the piece is compatable with the direction it is trying to move
   static boolean validDirection(int direction, char pieceChar) {
     switch (pieceChar) {
       case 'R': // rook
@@ -265,6 +270,8 @@ public class MoveCheckUtil {
         return false;
     }
   }
+
+  // move a piece without checking for legality
   static void movePiece(Piece[][] board, int row1, int col1, int row2, int col2) {
     board[row1][col1] = board[row1][col1];
     board[row1][col1] = null;

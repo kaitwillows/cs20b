@@ -7,8 +7,8 @@ class Board {
   // ArrayList<ArrayList<Piece>> board = new ArrayList<ArrayList<Piece>>();
   Piece[][] board = new Piece[8][8];
 
-  // final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
-     final String DEFAULT_BOARD = "                            Q                                    ";
+  final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
+    //  final String DEFAULT_BOARD = "                            Q                                    ";
 
 
 
@@ -67,22 +67,50 @@ class Board {
     }
   }
 
-  void printBoard() {
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-        try {
-          System.out.print(board[i][j].getPieceChar());
+  void printBoard(boolean fromWhite) {
+    if (fromWhite) {
+      System.out.println("   A B C D E F G H");
+      for (int i = 0; i <= 7; i++) {
+        System.out.print((8 - i) + " ");
+        for (int j = 0; j <= 7; j++) {
+          try {
+            System.out.print("|" + board[i][j].getPieceChar());
+          }
+          catch(NullPointerException e) { // for the blank spaces
+            System.out.print("| ");
+          }
         }
-        catch(NullPointerException e) { // for the blank spaces probably
-          System.out.print(" ");
-        }
+        System.out.print("|\n");
       }
-      System.out.print("\n");
+    } else {
+      System.out.println("   H G F E D C B A");
+      for (int i = 7; i >= 0; i--) {
+        System.out.print((8 - i) + " ");
+        for (int j = 7; j >= 0; j--) {
+          try {
+            System.out.print("|" + board[i][j].getPieceChar());
+          }
+          catch(NullPointerException e) { // for the blank spaces
+            System.out.print("| ");
+          }
+        }
+        System.out.print("|\n");
+      } 
     }
   }
   
-  void move(Piece[][] board, int row1, int col1, int row2, int col2) { // im so tired rn
-    
+  void move(int row1, int col1, int row2, int col2) { // im so tired rn
+    // check if the move can be made
+    try {
+      // the following line will throw an exception to main if the move is illegal or the king is in check, terminating the rest of the code
+      board[row1][col1].moveCheck(board, row1, col1, row2, col2);
+      board[row1][col1] = board[row1][col1];
+      board[row1][col1] = null;
+    } catch (IllegalMoveException e) {
+      throw e;
+    } catch (KingAttackedException e) {
+      throw e;
+    }
   }
 
   void testMove() { // for testing; this needs a WAY better implementation

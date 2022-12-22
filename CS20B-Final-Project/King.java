@@ -1,6 +1,7 @@
 class King extends Piece {
   boolean isWhite;
   char pieceChar;
+  boolean hasMoved = false; // for castleing
 
 
 

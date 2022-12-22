@@ -4,6 +4,9 @@ class Piece {
   char pieceChar;
   boolean isWhite;
 
+  void moveCheck(Piece[][] board, int row1, int col1, int row2, int col2) throws IllegalArgumentException { 
+    
+  }
   char getPieceChar() {
     return this.pieceChar;
   }
