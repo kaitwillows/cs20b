@@ -16,6 +16,7 @@ class Main {
     int col2;
 
     System.out.print("\033[H\033[2J\n");
+    
 
     while (true) {
       System.out.print("\n");
@@ -51,6 +52,12 @@ class Main {
 
       System.out.print("\033[H\033[2J\n");
       isWhite = !isWhite;
+
+      if (gameObj.gameWon) {
+        break;
+      }
     }
+
+    stringScanner.close();
   }
 }

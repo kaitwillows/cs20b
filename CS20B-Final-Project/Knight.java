@@ -13,11 +13,14 @@ class Knight extends Piece {
     }
   }
 
-  void moveCheck() {
-    if (isWhite) { // the piece is white
-      
-    } else { // the piece is black
-
+  void moveCheck(Piece[][] board, int row1, int col1, int row2, int col2) throws IllegalArgumentException { 
+    int moveStatus = MoveCheckUtil.knight(board, row1, col1, row2, col2);
+    if (moveStatus == -1) {
+      KingAttackedException e = new KingAttackedException("piece is attacking the king");
+      throw e;
+    } else if (moveStatus == 0) {
+      IllegalMoveException e = new IllegalMoveException("this move is illegal");
+      throw e;
     }
   }
 

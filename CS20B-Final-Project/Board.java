@@ -9,7 +9,7 @@ class Board {
 
   final String DEFAULT_BOARD = "rnbqkbnr                                                RNBQKBNR";
     //  final String DEFAULT_BOARD = "                            Q                                    ";
-
+  boolean gameWon = false;
 
 
   public Board(boolean useDefaultBoard) {

@@ -3,6 +3,7 @@ class Piece {
 
   char pieceChar;
   boolean isWhite;
+  boolean hasMoved;
 
   void moveCheck(Piece[][] board, int row1, int col1, int row2, int col2) throws IllegalArgumentException { 
     
@@ -12,6 +13,9 @@ class Piece {
   }
   boolean getIsWhite() {
     return this.isWhite;
+  }
+  boolean getHasMoved() {
+    return this.hasMoved;
   }
   
   // pieces should also include variables:

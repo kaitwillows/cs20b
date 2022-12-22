@@ -238,6 +238,60 @@ public class MoveCheckUtil {
     return 0;
   }
 
+  // check if a move is legal for the king
+  static int king(Piece[][] board, int row1, int col1, int row2, int col2) {
+    if (row1 == row2 && col1 == col2) {
+      return 0; // the piece is not moving
+    } else if (Math.abs(row1 - row2) > 1 || Math.abs(col1 - col2) > 1) {
+      return 0; // the king is moving more than one square away
+    } else if (board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
+      return 0; // the king is attacking an ally
+    } else {
+      return 1;
+    }
+  }
+
+  // check if a move is legal for the knight
+  static int knight(Piece[][] board, int row1, int col1, int row2, int col2) {
+    if (board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
+      return 0;
+    } else if (row1 + 2 == row2 && col1 + 1 == col2) {
+      return 1;
+    } else if (row1 - 2 == row2 && col1 + 1 == col2) {
+      return 1;
+    } else if (row1 + 2 == row2 && col1 - 1 == col2) {
+      return 1;
+    } else if (row1 - 2 == row2 && col1 - 1 == col2) {
+      return 1;
+    } else if (row1 + 1 == row2 && col1 + 2 == col2) {
+      return 1;
+    } else if (row1 - 1 == row2 && col1 + 2 == col2) {
+      return 1;
+    } else if (row1 + 1 == row2 && col1 - 2 == col2) {
+      return 1;
+    } else if (row1 - 1 == row2 && col1 - 2 == col2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  // hhhhhhggg idk how do this
+  static int pawn(Piece[][] board, int row1, int col1, int row2, int col2) {
+    // !(board[i][col1] instanceof Piece) // empty space
+    if (board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
+      return 0; // the pawn is attacking an ally
+    }
+    if (!(board[row2][col2] instanceof Piece)) { // not attacking
+      if (col1 != col2) {
+        return 0; // bros moving side to side
+      } else if (!board[row1][col1].getHasMoved() && row1 - row2 == 2) { // hasnt moved, and its moving twice
+        return 1;
+      }
+    }
+    return 1;
+  }
+
   // check if the piece is compatable with the direction it is trying to move
   static boolean validDirection(int direction, char pieceChar) {
     switch (pieceChar) {

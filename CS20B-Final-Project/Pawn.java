@@ -1,7 +1,7 @@
 class Pawn extends Piece {
   boolean isWhite;
   char pieceChar;
-
+  boolean hasMoved = false; // for castleing
 
 
   public Pawn(boolean isWhite) {
@@ -13,11 +13,14 @@ class Pawn extends Piece {
     }
   }
 
-  void moveCheck() {
-    if (isWhite) { // the pawn is white
-      
-    } else { // the pawn is black
-
+  void moveCheck(Piece[][] board, int row1, int col1, int row2, int col2) throws IllegalArgumentException { 
+    int moveStatus = MoveCheckUtil.pawn(board, row1, col1, row2, col2);
+    if (moveStatus == -1) {
+      KingAttackedException e = new KingAttackedException("piece is attacking the king");
+      throw e;
+    } else if (moveStatus == 0) {
+      IllegalMoveException e = new IllegalMoveException("this move is illegal");
+      throw e;
     }
   }
 
@@ -27,6 +30,9 @@ class Pawn extends Piece {
   }
   boolean getIsWhite() {
     return isWhite;
+  }
+  boolean getHasMoved() {
+    return hasMoved;
   }
 
 }
