@@ -1,15 +1,4 @@
-// this class will help with the checks needed to test for legal moves
-
-/* int direction works like this:
-
-7 8 9
-4 5 6
-1 2 3
-
-it mimicks the numberpad on a standard keyboard
-5 should never be used
-*/
-
+// this is a utility class designed to help with the checks needed to test for legal moves
 public class MoveCheckUtil {
   // check fot the legality of linear moves (diagonals and straights)
   static int linear(Piece[][] board, int row1, int col1, int row2, int col2) {
@@ -325,12 +314,7 @@ public class MoveCheckUtil {
     }
   }
 
-  // move a piece without checking for legality
-  static void movePiece(Piece[][] board, int row1, int col1, int row2, int col2) {
-    board[row1][col1] = board[row1][col1];
-    board[row1][col1] = null;
-  }
-
+  // convert a raw string move input to 
   static int parseNotation(int returnAxis, String notation) {
     // return axis can be 1-4
     int number = -1;

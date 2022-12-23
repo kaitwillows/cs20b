@@ -1,9 +1,10 @@
 class Queen extends Piece {
+
+  // variable initialization
   boolean isWhite;
   char pieceChar;
 
-
-
+  // constructor
   public Queen(boolean isWhite) {
     this.isWhite = isWhite;
     if (isWhite) {
@@ -13,6 +14,8 @@ class Queen extends Piece {
     }
   }
 
+  // check if the move is legal
+  // if not, throw the exception to the Board object
   void moveCheck(Piece[][] board, int row1, int col1, int row2, int col2) throws IllegalArgumentException { 
     int linearStatus = MoveCheckUtil.linear(board, row1, col1, row2, col2);
     if (linearStatus == -1) {
@@ -24,7 +27,7 @@ class Queen extends Piece {
     }
   }
 
-  // appear in piece.java
+  // get...() methods allow variables from different subclasses of Piece to be accessed from a Piece[] board (array)
   char getPieceChar() {
     return pieceChar;
   }
@@ -33,6 +36,3 @@ class Queen extends Piece {
   }
 
 }
-
-// sidewhite
-//
