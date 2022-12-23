@@ -314,7 +314,7 @@ public class MoveCheckUtil {
     }
   }
 
-  // convert a raw string move input to 
+  // convert a raw string move input to ints
   static int parseNotation(int returnAxis, String notation) {
     // return axis can be 1-4
     int number = -1;
