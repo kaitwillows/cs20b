@@ -66,55 +66,83 @@ class Board {
 
   void printChar(int i, int j, boolean withIcons) {
     if (withIcons) {
+      if (Math.abs((1+i) - (1+j)) % 2 == 0) {
+        System.out.print("\u001B[47m"); // light square
+      } else {
+        System.out.print("\u001B[100m"); // dark square
+      }
+      try {
       switch (board[i][j].getPieceChar()) {
         case 'K':
-          System.out.print("♔");
+          System.out.print("♔ ");
           break;
         case 'Q':
-          System.out.print("♕");
+          System.out.print("♕ ");
           break;
         case 'R':
-          System.out.print("♖");
+          System.out.print("♖ ");
           break;
         case 'B':
-          System.out.print("♗");
+          System.out.print("♗ ");
           break;
         case 'N':
-          System.out.print("♘");
+          System.out.print("♘ ");
           break;
         case 'P':
-          System.out.print("♙");
+          System.out.print("♙ ");
           break;
         case 'k':
-          System.out.print("♚");
+          System.out.print("♚ ");
           break;
         case 'q':
-          System.out.print("♛");
+          System.out.print("♛ ");
           break;
         case 'r':
-          System.out.print("♜");
+          System.out.print("♜ ");
           break;
         case 'b':
-          System.out.print("♝");
+          System.out.print("♝ ");
           break;
         case 'n':
-          System.out.print("♞");
+          System.out.print("♞ ");
           break;
         case 'p':
-          System.out.print("♟︎");
+          System.out.print("♟︎ ");
           break;
         default:
           System.out.print("");
           break;
       }
+    } catch (Exception e) {
+      System.out.print("  ");
+    } finally {
+      System.out.print("\u001b[0m"); // reset colour
+    }
+
     } else {
-      System.out.print(board[i][j].getPieceChar());
+      if (Math.abs((1+i) - (1+j)) % 2 == 0) {
+        System.out.print("\u001B[47m"); // light square
+      } else {
+        System.out.print("\u001B[100m"); // dark square
+      }
+      try {
+        if (board[i][j].getIsWhite()) {
+          System.out.print("\u001B[37mW");
+        } else {
+          System.out.print("\u001B[30mb");
+        }
+        System.out.print(board[i][j].getPieceChar());
+      } catch (Exception e) {
+        System.out.print("  ");
+      } finally {
+        System.out.print("\u001b[0m"); // reset colour
+      }
     }
   }
   // print the board to the terminal with appropriate formatting
   void printBoard(boolean fromWhite, boolean withIcons) {
     if (fromWhite) { // print the board from white's perspective
-      System.out.println("   A B C D E F G H");
+      System.out.println("   A  B  C  D  E  F  G  H");
       for (int i = 0; i <= 7; i++) {
         System.out.print((8 - i) + " ");
         for (int j = 0; j <= 7; j++) {
@@ -129,7 +157,7 @@ class Board {
         System.out.print("|\n");
       }
     } else { // print the board from black's perspective
-      System.out.println("   H G F E D C B A");
+      System.out.println("   H  G  F  E  D  C  B  A");
       for (int i = 7; i >= 0; i--) {
         System.out.print((8 - i) + " ");
         for (int j = 7; j >= 0; j--) {

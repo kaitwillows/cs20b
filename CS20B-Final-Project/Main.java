@@ -3,6 +3,7 @@ import java.util.Scanner;
 class Main {
   public static boolean isWhite = true;
   public static void main(String[] args) {
+    boolean useIcons = true;
 
     // variable and object initialization
     Board gameObj = new Board(true);
@@ -17,8 +18,10 @@ class Main {
     System.out.print("\033[H\033[2J\n");
     System.out.println("        CCCCCCCCCCCCCHHHHHHHHH     HHHHHHHHHEEEEEEEEEEEEEEEEEEEEEE   SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS \n     CCC::::::::::::CH:::::::H     H:::::::HE::::::::::::::::::::E SS:::::::::::::::S SS:::::::::::::::S\n   CC:::::::::::::::CH:::::::H     H:::::::HE::::::::::::::::::::ES:::::SSSSSS::::::SS:::::SSSSSS::::::S\n  C:::::CCCCCCCC::::CHH::::::H     H::::::HHEE::::::EEEEEEEEE::::ES:::::S     SSSSSSSS:::::S     SSSSSSS\n C:::::C       CCCCCC  H:::::H     H:::::H    E:::::E       EEEEEES:::::S            S:::::S            \nC:::::C                H:::::H     H:::::H    E:::::E             S:::::S            S:::::S            \nC:::::C                H::::::HHHHH::::::H    E::::::EEEEEEEEEE    S::::SSSS          S::::SSSS         \nC:::::C                H:::::::::::::::::H    E:::::::::::::::E     SS::::::SSSSS      SS::::::SSSSS    \nC:::::C                H:::::::::::::::::H    E:::::::::::::::E       SSS::::::::SS      SSS::::::::SS  \nC:::::C                H::::::HHHHH::::::H    E::::::EEEEEEEEEE          SSSSSS::::S        SSSSSS::::S \nC:::::C                H:::::H     H:::::H    E:::::E                         S:::::S            S:::::S\n C:::::C       CCCCCC  H:::::H     H:::::H    E:::::E       EEEEEE            S:::::S            S:::::S\n  C:::::CCCCCCCC::::CHH::::::H     H::::::HHEE::::::EEEEEEEE:::::ESSSSSSS     S:::::SSSSSSSS     S:::::S\n   CC:::::::::::::::CH:::::::H     H:::::::HE::::::::::::::::::::ES::::::SSSSSS:::::SS::::::SSSSSS:::::S\n     CCC::::::::::::CH:::::::H     H:::::::HE::::::::::::::::::::ES:::::::::::::::SS S:::::::::::::::SS \n        CCCCCCCCCCCCCHHHHHHHHH     HHHHHHHHHEEEEEEEEEEEEEEEEEEEEEE SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS");
     try {
-      System.out.print("\n\n                                               press enter...");
-      stringScanner.nextLine();
+      System.out.print("\n\n                                      press enter to play with icons\n                                      enter i to play without icons ");
+      if (stringScanner.nextLine().charAt(0) == 'i') {
+        useIcons = false;
+      }
     } catch (Exception e) {} // for when nothing is entered
     System.out.print("\033[H\033[2J\n");
 
@@ -29,8 +32,8 @@ class Main {
       } else {
         System.out.print("Black ");
       }
-      System.out.println("to move...");
-      gameObj.printBoard(isWhite, true);
+      System.out.println("to move...\n");
+      gameObj.printBoard(isWhite, useIcons);
       
       System.out.print("\nenter move: ");
       String moveString = stringScanner.nextLine();
