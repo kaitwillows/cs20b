@@ -103,7 +103,9 @@ class Board {
         case 'p':
           System.out.print("♟︎");
           break;
-        
+        default:
+          System.out.print("");
+          break;
       }
     } else {
       System.out.print(board[i][j].getPieceChar());
@@ -121,7 +123,7 @@ class Board {
             printChar(i, j, withIcons);
           }
           catch(NullPointerException e) { // for the blank spaces
-            System.out.print("| ");
+            System.out.print(" ");
           }
         }
         System.out.print("|\n");
