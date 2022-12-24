@@ -229,6 +229,8 @@ public class MoveCheckUtil {
       return 0; // the king is moving more than one square away
     } else if (board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
       return 0; // the king is attacking an ally
+    } else if (board[row1][row2].getPieceChar() == 'K' || board[row1][row2].getPieceChar() == 'k') {
+      return -1;
     } else {
       return 1;
     }
@@ -260,6 +262,7 @@ public class MoveCheckUtil {
     boolean isWhite = board[row1][row2].getIsWhite();
     boolean hasMoved = board[row1][row2].getHasMoved();
     boolean attacking;
+    boolean legal = false;
     
     if (board[row2][col2] instanceof Piece && board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
       return 0; // the pawn is attacking an ally
@@ -276,18 +279,18 @@ public class MoveCheckUtil {
       if (attacking) {
         // white and attacking
         if (row1 - 1 == row2 && Math.abs(col1-col2) == 1) { // up one space and right or left one space
-          return 1;
+          legal = true;
         }
       } else {
         if (hasMoved) {
           // white, not attacking, and has moved
           if (row1 - 1 == row2) {
-            return 1;
+            legal = true;
           }
         } else {
           // white, not attacking, and has not moved
           if (row1 - 1 == row2 || row1 - 2 == row2) {
-            return 1;
+            legal = true;
           }
         }
       }
@@ -295,23 +298,29 @@ public class MoveCheckUtil {
       if (attacking) {
         // black and attacking
         if (row1 + 1 == row2 && Math.abs(col1-col2) == 1) { // down one space and right or left one space
-          return 1;
+          legal = true;
         }
       } else {
         if (hasMoved) {
           // black, not attacking, and has moved
           if (row1 + 1 == row2) {
-            return 1;
+            legal = true;
           }
         } else {
           // black, not attacking, and has not moved
           if (row1 + 1 == row2 || row1 - 2 == row2) {
-            return 1;
+            legal = true;
           }
         }
       }
     }
-    return 0;
+    if (!legal) {
+      return 0;
+    } else if (attacking && (board[row2][col2].getPieceChar() == 'k' || board[row2][col2].getPieceChar() == 'K')) {
+      return -1;
+    } else {
+      return 1;
+    }
   }
 
   // check if the piece is compatable with the direction it is trying to move

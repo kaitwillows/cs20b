@@ -1,4 +1,4 @@
-// Board is responsible for the creation and modification of the game
+// the Board class is responsible for the creation and modification of the game
 
 // import java.util.ArrayList;
 

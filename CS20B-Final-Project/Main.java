@@ -59,6 +59,8 @@ class Main {
         System.out.print("\033[H\033[2J");
         System.out.println("That move (" + moveString + ") is illegal, please enter a legal move");
         continue;
+      } catch (KingAttackedException e) {
+
       }
 
       System.out.print("\033[H\033[2J\n");
