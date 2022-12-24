@@ -5,7 +5,7 @@
 class Board {
 
   // variable initialization 
-  final String DEFAULT_BOARD = "rnbqkbnr                                                RNBQKBNR";
+  final String DEFAULT_BOARD = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
   Piece[][] board = new Piece[8][8];
   boolean gameWon = false;
 
@@ -64,15 +64,61 @@ class Board {
     }
   }
 
+  void printChar(int i, int j, boolean withIcons) {
+    if (withIcons) {
+      switch (board[i][j].getPieceChar()) {
+        case 'K':
+          System.out.print("♔");
+          break;
+        case 'Q':
+          System.out.print("♕");
+          break;
+        case 'R':
+          System.out.print("♖");
+          break;
+        case 'B':
+          System.out.print("♗");
+          break;
+        case 'N':
+          System.out.print("♘");
+          break;
+        case 'P':
+          System.out.print("♙");
+          break;
+        case 'k':
+          System.out.print("♚");
+          break;
+        case 'q':
+          System.out.print("♛");
+          break;
+        case 'r':
+          System.out.print("♜");
+          break;
+        case 'b':
+          System.out.print("♝");
+          break;
+        case 'n':
+          System.out.print("♞");
+          break;
+        case 'p':
+          System.out.print("♟︎");
+          break;
+        
+      }
+    } else {
+      System.out.print(board[i][j].getPieceChar());
+    }
+  }
   // print the board to the terminal with appropriate formatting
-  void printBoard(boolean fromWhite) {
+  void printBoard(boolean fromWhite, boolean withIcons) {
     if (fromWhite) { // print the board from white's perspective
       System.out.println("   A B C D E F G H");
       for (int i = 0; i <= 7; i++) {
         System.out.print((8 - i) + " ");
         for (int j = 0; j <= 7; j++) {
           try {
-            System.out.print("|" + board[i][j].getPieceChar());
+            System.out.print("|");
+            printChar(i, j, withIcons);
           }
           catch(NullPointerException e) { // for the blank spaces
             System.out.print("| ");
@@ -86,7 +132,8 @@ class Board {
         System.out.print((8 - i) + " ");
         for (int j = 7; j >= 0; j--) {
           try {
-            System.out.print("|" + board[i][j].getPieceChar());
+            System.out.print("|");
+            printChar(i, j, withIcons);
           }
           catch(NullPointerException e) { // for the blank spaces
             System.out.print("| ");
@@ -100,6 +147,10 @@ class Board {
   // check if a move is legal, then make the move. 
   // if the move is illegal, throw the exception to Main
   void move(int row1, int col1, int row2, int col2) {
+    if (board[row1][col1].getIsWhite() != Main.isWhite) {
+      IllegalMoveException e = new IllegalMoveException("trying to move opponents piece");
+      throw e;
+    }
     try {
       board[row1][col1].moveCheck(board, row1, col1, row2, col2); // check for legality
       board[row2][col2] = board[row1][col1]; // if there's no exception, move the piece

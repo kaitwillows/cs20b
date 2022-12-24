@@ -1,14 +1,8 @@
 // this is a utility class designed to help with the checks needed to test for legal moves
 public class MoveCheckUtil {
+
   // check fot the legality of linear moves (diagonals and straights)
   static int linear(Piece[][] board, int row1, int col1, int row2, int col2) {
-    /*
-    linear() {
-      1. find the direction of the chosen move
-      2. check if the piece can move in that direction
-      3. use for loops to test if the move is valid
-    } 
-    */
 
     // variable declarations/initilization
     int direction = 5;
@@ -242,43 +236,82 @@ public class MoveCheckUtil {
 
   // check if a move is legal for the knight
   static int knight(Piece[][] board, int row1, int col1, int row2, int col2) {
-    if (board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
+    if (board[row2][col2] instanceof Piece && board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
       return 0;
-    } else if (row1 + 2 == row2 && col1 + 1 == col2) {
-      return 1;
+    } else if (row1 + 2 == row2 && col1 + 1 == col2) { // if none of these are true...
     } else if (row1 - 2 == row2 && col1 + 1 == col2) {
-      return 1;
     } else if (row1 + 2 == row2 && col1 - 1 == col2) {
-      return 1;
     } else if (row1 - 2 == row2 && col1 - 1 == col2) {
-      return 1;
     } else if (row1 + 1 == row2 && col1 + 2 == col2) {
-      return 1;
     } else if (row1 - 1 == row2 && col1 + 2 == col2) {
-      return 1;
     } else if (row1 + 1 == row2 && col1 - 2 == col2) {
-      return 1;
     } else if (row1 - 1 == row2 && col1 - 2 == col2) {
-      return 1;
     } else {
-      return 0;
+      return 0; // do this and stop this method
     }
+    if (board[row1][row2].getPieceChar() == 'K' || board[row1][row2].getPieceChar() == 'k') {
+      return -1;
+    }
+    return 1;
   }
 
   // hhhhhhggg idk how do this
   static int pawn(Piece[][] board, int row1, int col1, int row2, int col2) {
-    // !(board[i][col1] instanceof Piece) // empty space
-    if (board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
+    boolean isWhite = board[row1][row2].getIsWhite();
+    boolean hasMoved = board[row1][row2].getHasMoved();
+    boolean attacking;
+    
+    if (board[row2][col2] instanceof Piece && board[row1][col1].getIsWhite() == board[row2][col2].getIsWhite()) {
       return 0; // the pawn is attacking an ally
     }
-    if (!(board[row2][col2] instanceof Piece)) { // not attacking
-      if (col1 != col2) {
-        return 0; // bros moving side to side
-      } else if (!board[row1][col1].getHasMoved() && row1 - row2 == 2) { // hasnt moved, and its moving twice
-        return 1;
+
+    if (!(board[row2][col2] instanceof Piece)) {
+      attacking = false;
+    } else {
+      attacking = true;
+    }
+
+    // for the required combinations of isWhite, attacking, and hasMoved, check if the move is legal
+    if (isWhite) {
+      if (attacking) {
+        // white and attacking
+        if (row1 - 1 == row2 && Math.abs(col1-col2) == 1) { // up one space and right or left one space
+          return 1;
+        }
+      } else {
+        if (hasMoved) {
+          // white, not attacking, and has moved
+          if (row1 - 1 == row2) {
+            return 1;
+          }
+        } else {
+          // white, not attacking, and has not moved
+          if (row1 - 1 == row2 || row1 - 2 == row2) {
+            return 1;
+          }
+        }
+      }
+    } else {
+      if (attacking) {
+        // black and attacking
+        if (row1 + 1 == row2 && Math.abs(col1-col2) == 1) { // down one space and right or left one space
+          return 1;
+        }
+      } else {
+        if (hasMoved) {
+          // black, not attacking, and has moved
+          if (row1 + 1 == row2) {
+            return 1;
+          }
+        } else {
+          // black, not attacking, and has not moved
+          if (row1 + 1 == row2 || row1 - 2 == row2) {
+            return 1;
+          }
+        }
       }
     }
-    return 1;
+    return 0;
   }
 
   // check if the piece is compatable with the direction it is trying to move
